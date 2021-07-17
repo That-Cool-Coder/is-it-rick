@@ -14,7 +14,7 @@ Rick Roll detector website written in Python with Flask.
 
 ## Purpose
 
-To allow people to quickly and easily check if a URL leads to a Rick Roll.
+To allow people to quickly and easily check if a given URL leads to a Rick Roll.
 
 ## Organisation of documentation
 
