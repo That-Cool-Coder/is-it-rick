@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ app_name }}</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="static/style.css">
+    </head>
+
+    <body>
+        <div id="topBar">
+            <table>
+                <tr>
+                    <td>
+                        <h1>{{ app_name }}</h1>
+                    </td>
+                    <td>
+                        <h2 id="slogan">{{ app_slogan }}</h2>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="mainDiv">
+            <p>{{ app_description }}</p>
+
+            <input id="urlInput" placeholder="URL to check">
+            <button onclick="checkUrl()">Check URL</button>
+            <br>
+            <br>
+            <div id="outputDiv"></div>
+        </div>
+    </body>
+
+    <script src="https://unpkg.com/spnr/cdn/latest/spnr.min.js"></script>
+    <script src="static/urls.js"></script>
+    <script src="static/common.js"></script>
+    <script src="static/homepage_script.js"></script>
+</html>

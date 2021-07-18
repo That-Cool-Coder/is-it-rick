@@ -11,6 +11,8 @@ Rick Roll detector website written in Python with Flask.
 - [Planned features for initial release](#planned-features-for-initial-release)
 - [Program architecture and organisation](#program-architecture-and-organisation)
 - [Implementation information](#implementation-information)
+- [Server/client communication protocols](#serverclient-communication-protocols)
+- [API](#api)
 - [Data storage](#data-storage)
 - [Deployment](#deployment)
 
@@ -117,10 +119,10 @@ The actual program is located in the directory `is_it_rick`.
 List of non-meta files (in order of importance):
 - `main.py` is the main file in there and it doesn't do much except handle app creation and import other things.
 - `config.py` holds various global constants. It's arguable that the constants should be localised to the files that use the constants, but that would make finding the constants more difficult.
+- `common.py` holds things needed by the whole project, including data-loading and enums.
 - `errors.py` holds all of the custom exceptions for this app.
 - `frontend_routes.py` defines all of the Flask routes for pages on the frontend.
 - `backend_routes.py` defines all of the Flask routes for API endpoints on the backend.
-- `data_loading.py` handles the loading and saving of data.
 - `data_structures.py` holds classes that hold the data.
 - `init_data_files.py` is not actually part of the app run by Apache2, but initialises the data files for deployment.
 
@@ -132,7 +134,42 @@ This section of the documentation is a place to list miscellanious information a
 
 #### Data
 
-The optimal solution to data loading and saving would be to have the data primarily stored in variables, loading from a file at startup and saving to the file at exit. However, Apache2 has a tendency to run multiple instances of the Flask app, which means that the different instances would have different data stored, and when it came to program shutdown, they would all overwrite each other's data in the data file and make a mess. To avoid this issue, one could make it so that the data was read from files and saved to files for every request, but that would be cumbersome to code and resource-intensive. In the future I might try implementing a caching mechanism but currently the data is just loaded for every request.
+The optimal solution to data loading and saving would be to have the data primarily stored in variables, loading from a file at startup and saving to the file at exit. However, Apache2 has a tendency to run multiple instances of the Flask app, which means that the different instances would have different data stored, and when it came to program shutdown, they would all overwrite each other's data in the data file and make a mess.
+
+To partially avoid this, each instance stores the data in variables, and every *n* seconds reads it from file. When new data is added (or when data is to be modified), the existing data read from the file, the new data is added (or modifications performed) and then the updated data is written back to the file.
+
+## Server/client communication protocols
+
+All data in both directions will be sent in JSON format. In addition to the main data, a `status` and a `status_code` must be returned in every response from the API.
+
+#### Statuses
+
+There are three statuses:
+- `OK` signifies that everything is nominal and that the attempted procedure was completed successfully
+- `WARNING` signifies that there has been an issue, probably on behalf of the client. Eg: client tries to signin but the target user is not found or the password is incorrect
+- `ERROR` signifies that there is a major error on the server which caused it to fail the target procedure. Eg: the database couldn't be opened.
+
+The statuses are stored in an enum in `is_it_rick/common.py`.
+
+#### Status Codes
+
+The status codes give more information about the issue. They are defined in `is_it_rick/common.py`.
+
+## API
+
+I didn't know what to call the different URLs in the API (endpoints?), so I just called this section `API`. It lists all of the URLs in the API, what they accept in the request and what they return.
+
+#### `/api/is_it_rick/` (planned)
+
+Check whether a given URL leads to a Rick Roll
+
+Accepts:
+- `url` (string) - the URL to check.
+
+Returns:
+- `is_rick_roll` (bool) - whether the URL is a Rick Roll.
+- `verified` (bool) - whether the Rick Roll has been verified or not. Only sent if `is_rick_roll` is true
+- `status` and `status_code`.
 
 ## Data storage
 
@@ -172,7 +209,7 @@ sudo apt-get install libApache2-mod-wsgi-py3 python-dev
 
 Step 3: Install python packages (You must use `sudo` or they won't be installed globally and therefore won't be available when the app is run):
 ```
-sudo -H pip3 install Flask flask-error-templating
+sudo -H pip3 install Flask flask-error-templating validators
 ```
 
 Step 4: Add a line to your server's config to make WSGI work (not sure yet)

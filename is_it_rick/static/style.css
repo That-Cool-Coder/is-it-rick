@@ -1,0 +1,58 @@
+* {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+body, html {
+    background-color: #f6f6f6;
+    margin: 0px;
+}
+
+h1 {
+    font-size: 38px;
+    margin: 0px;
+}
+
+h2 {
+    font-size: 24px;
+    margin: 0px;
+}
+
+p {
+    font-size: 16px;
+}
+
+#topBar {
+    background-color: #ce2b16;
+    display: block;
+    margin: 0px;
+    padding: 10px;
+}
+
+#topBar td {
+    padding: 0px;
+    vertical-align: bottom;
+}
+
+#slogan {
+    margin-left: 30px;
+    margin-bottom: 3px; /* for some reason the slogan always looks slightly too far down */
+}
+
+#topBar h1, #topBar h2, #topBar p {
+    color: #f6f6f6;
+}
+
+#mainDiv {
+    width: 80vw;
+    height: 70vh;
+
+    /* center div */
+    /* needs work - div easily goes too high on smallish screens */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: white;
+    padding: 10px;
+}

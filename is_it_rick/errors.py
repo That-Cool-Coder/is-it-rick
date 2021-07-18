@@ -1,1 +1,2 @@
-# placeholder file
+class InvalidUrl(BaseException):
+    pass
