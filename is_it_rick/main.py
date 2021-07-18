@@ -13,4 +13,4 @@ create_http_error_handlers(app, [
 ], 'http_error_page.html')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='')
+    app.run(host='0.0.0.0', port='5000')
