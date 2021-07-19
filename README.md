@@ -159,7 +159,7 @@ The status codes give more information about the issue. They are defined in `is_
 
 I didn't know what to call the different URLs in the API (endpoints?), so I just called this section `API`. It lists all of the URLs in the API, what they accept in the request and what they return.
 
-#### `/api/is_it_rick/` (planned)
+#### `/api/is_it_rick/`
 
 Check whether a given URL leads to a Rick Roll
 
@@ -169,6 +169,14 @@ Accepts:
 Returns:
 - `is_rick_roll` (bool) - whether the URL is a Rick Roll.
 - `verified` (bool) - whether the Rick Roll has been verified or not. Only sent if `is_rick_roll` is true
+- `status` and `status_code`.
+
+#### `/api/register_rick_roll`
+
+Accepts:
+- `url` (string) - the URL that leads to the Rick Roll.
+
+Returns:
 - `status` and `status_code`.
 
 ## Data storage
