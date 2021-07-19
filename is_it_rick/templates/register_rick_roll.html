@@ -11,7 +11,7 @@
             <table>
                 <tr>
                     <td>
-                        <h1>{{ app_name }}</h1>
+                        <a class="noUnderline" href="/"><h1>{{ app_name }}</h1></a>
                     </td>
                     <td>
                         <h2 id="slogan">{{ app_slogan }}</h2>
@@ -26,12 +26,11 @@
             <br>
             <input id="urlInput" placeholder="URL to register">
             <button onclick="registerRickRoll()">Register URL</button>
-            
         </div>
     </body>
 
     <script src="https://unpkg.com/spnr/cdn/latest/spnr.min.js"></script>
-    <script src="static/urls.js"></script>
-    <script src="static/common.js"></script>
-    <script src="static/homepage_script.js"></script>
+    <script src="/static/urls.js"></script>
+    <script src="/static/common.js"></script>
+    <script src="/static/register_rick_roll_script.js"></script>
 </html>

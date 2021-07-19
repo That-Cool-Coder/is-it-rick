@@ -14,8 +14,9 @@ rick_rolls = [
     RickRoll('https://storage.calbabreaker.repl.co/secret.mp4', True),
 ]
 
-@app.route(urllib.parse.urljoin(config.API_BASE_URL, 'is_it_rick/'), methods=['POST'])
-def is_it_rick():
+@app.route(urllib.parse.urljoin(config.API_BASE_URL,
+    'is_it_rick/'), methods=['POST'])
+def api_is_it_rick():
     '''Check if the given URL is a Rick Roll'''
 
     if not request_fields_valid(['url'], request.json):
@@ -41,7 +42,9 @@ def is_it_rick():
     except:
         return create_response(Status.ERROR, StatusCode.UNKNOWN_ERROR)
 
-def register_rick_roll():
+@app.route(urllib.parse.urljoin(config.API_BASE_URL,
+    'register_rick_roll'), methods=['POST'])
+def api_register_rick_roll():
     '''Register a URL that leads to a Rick Roll'''
     if not request_fields_valid(['url'], request.json):
         return create_response(Status.WARNING, StatusCode.INVALID_REQUEST)
@@ -51,17 +54,20 @@ def register_rick_roll():
         if not url_valid(sent_url):
             return create_response(Status.WARNING, StatusCode.INVALID_URL)
 
+        # First check that the URL is not already listed
         found_rick_roll = None
         for rick_roll in rick_rolls:
             if rick_roll.url == sent_url:
                 found_rick_roll = rick_roll
                 break
-        
         if found_rick_roll is not None:
-            return create_response(is_rick_roll=False)
-        elif found_rick_roll.verified:
-            return create_response(is_rick_roll=True, verified=True)
-        else:
-            return create_response(is_rick_roll=True, verified=False)
+            return create_response(Status.WARNING, StatusCode.URL_ALREADY_REGISTERED)
+
+        new_rick_roll = RickRoll(sent_url, False)
+        rick_rolls.append(new_rick_roll)
+        
+        return create_response()
+    except errors.InvalidUrl:
+        return create_response(Status.WARNING, StatusCode.INVALID_URL)
     except:
         return create_response(Status.ERROR, StatusCode.UNKNOWN_ERROR)

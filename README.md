@@ -36,6 +36,8 @@ All of the documentation for contributors is in this file. I've decided not to s
 - Avoid using variable names such as `i`, even for loop indexes. Name the loop index after what the index counts.
 - Avoid using English contractions (eg `can't don't`).
 - If practical, keep function lengths below 75 lines.
+- Name all files using `snake_case`.
+- Use `snake_case` for API urls (as `snake_case` has been the standard for this project) and `hyphen-snake-case` for frontend urls (as `hyphen-snake-case` looks nicer to the user).
 
 #### In data and requests
 

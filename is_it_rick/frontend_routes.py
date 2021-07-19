@@ -10,5 +10,5 @@ def homepage():
 
 @app.route('/register-rick-roll/', methods=['GET'])
 def register_rick_roll():
-    return render_template('register-rick-roll.html', app_name=config.APP_NAME,
+    return render_template('register_rick_roll.html', app_name=config.APP_NAME,
         app_slogan=config.APP_SLOGAN)

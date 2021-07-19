@@ -16,6 +16,7 @@ class StatusCode(Enum):
     # StatusCodes that go with Status WARNING
     INVALID_URL = 'INVALID_URL'
     INVALID_REQUEST = 'INVALID_REQUEST'
+    URL_ALREADY_REGISTERED = 'URL_ALREADY_REGISTERED'
 
     # StatusCodes that go with Status ERROR
     UNKNOWN_ERROR = 'UNKNOWN_ERROR'

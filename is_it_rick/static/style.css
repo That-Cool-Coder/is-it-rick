@@ -21,6 +21,10 @@ p {
     font-size: 16px;
 }
 
+.noUnderline {
+    text-decoration: none;
+}
+
 #topBar {
     background-color: #ce2b16;
     display: block;
