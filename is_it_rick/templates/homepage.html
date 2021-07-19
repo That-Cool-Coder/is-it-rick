@@ -1,39 +1,20 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>{{ app_name }}</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="static/style.css">
-    </head>
+{% extends 'layout.html' %}
+{% block title %}Home{% endblock %}
 
-    <body>
-        <div id="topBar">
-            <table>
-                <tr>
-                    <td>
-                        <a class="noUnderline" href="/"><h1>{{ app_name }}</h1></a>
-                    </td>
-                    <td>
-                        <h2 id="slogan">{{ app_slogan }}</h2>
-                    </td>
-                </tr>
-            </table>
-        </div>
+{% block content %}
+<h2>Quickly and easily check if a URL leads to a Rick Roll</h2>
+<br>
+<br>
+<input id="urlInput" placeholder="URL to check">
+<button onclick="checkUrl()">Check URL</button>
+<br>
+<br>
+<div>
+    <p id="outputParagraph"></p>
+    <p id="warningParagraph"></p>
+</div>
+{% endblock %}
 
-        <div id="mainDiv">
-            <h2>Quickly and easily check if a URL leads to a Rick Roll</h2>
-            <br>
-            <br>
-            <input id="urlInput" placeholder="URL to check">
-            <button onclick="checkUrl()">Check URL</button>
-            <br>
-            <br>
-            <div id="outputDiv"></div>
-        </div>
-    </body>
-
-    <script src="https://unpkg.com/spnr/cdn/latest/spnr.min.js"></script>
-    <script src="static/urls.js"></script>
-    <script src="static/common.js"></script>
-    <script src="static/homepage_script.js"></script>
-</html>
+{% block scripts %}
+<script src="static/homepage_script.js"></script>
+{% endblock %}

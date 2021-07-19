@@ -1,36 +1,14 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>{{ app_name }}</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="/static/style.css">
-    </head>
+{% extends 'layout.html' %}
+{% block title %}Register Rick Roll{% endblock %}
 
-    <body>
-        <div id="topBar">
-            <table>
-                <tr>
-                    <td>
-                        <a class="noUnderline" href="/"><h1>{{ app_name }}</h1></a>
-                    </td>
-                    <td>
-                        <h2 id="slogan">{{ app_slogan }}</h2>
-                    </td>
-                </tr>
-            </table>
-        </div>
+{% block content %}
+<h2>Register a Rick Roll</h2>
+<br>
+<br>
+<input id="urlInput" placeholder="URL to register">
+<button onclick="registerRickRoll()">Register URL</button>
+{% endblock %}
 
-        <div id="mainDiv">
-            <h2>Register a Rick Roll</h2>
-            <br>
-            <br>
-            <input id="urlInput" placeholder="URL to register">
-            <button onclick="registerRickRoll()">Register URL</button>
-        </div>
-    </body>
-
-    <script src="https://unpkg.com/spnr/cdn/latest/spnr.min.js"></script>
-    <script src="/static/urls.js"></script>
-    <script src="/static/common.js"></script>
-    <script src="/static/register_rick_roll_script.js"></script>
-</html>
+{% block scripts %}
+<script src="/static/register_rick_roll_script.js"></script>
+{% endblock %}

@@ -25,6 +25,10 @@ p {
     text-decoration: none;
 }
 
+#warningParagraph {
+    color: red;
+}
+
 #topBar {
     background-color: #ce2b16;
     display: block;

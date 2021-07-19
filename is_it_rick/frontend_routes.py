@@ -5,10 +5,8 @@ from is_it_rick import config
 
 @app.route('/', methods=['GET'])
 def homepage():
-    return render_template('homepage.html', app_name=config.APP_NAME,
-        app_slogan=config.APP_SLOGAN)
+    return render_template('homepage.html')
 
 @app.route('/register-rick-roll/', methods=['GET'])
 def register_rick_roll():
-    return render_template('register_rick_roll.html', app_name=config.APP_NAME,
-        app_slogan=config.APP_SLOGAN)
+    return render_template('register_rick_roll.html')

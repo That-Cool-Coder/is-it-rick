@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>{{ error_code }}</title>
-        <meta charset="utf-8">
-    </head>
+{% extends 'layout.html' %}
+{% block title %}{{ error_code }}{% endblock %}
 
-    <body>
-        <h1>{{ error_code }}</h1>
-        <p>{{ message }}</p>
-    </body>
-</html>
+{% block content %}
+<h1>{{ error_code }}</h1>
+<p>{{ message }}</p>
+{% endblock %}

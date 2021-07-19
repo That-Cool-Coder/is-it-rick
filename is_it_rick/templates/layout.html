@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}{% endblock %} | Is It Rick?</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+
+    <body>
+        <div id="topBar">
+            <table>
+                <tr>
+                    <td>
+                        <a class="noUnderline" href="/"><h1>Is It Rick?</h1></a>
+                    </td>
+                    <td>
+                        <h2 id="slogan">Fast, free Rick Roll detector</h2>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="mainDiv">{% block content %} {% endblock %}</div>
+        </div>
+    </body>
+
+    <script src="https://unpkg.com/spnr/cdn/latest/spnr.min.js"></script>
+    <script src="/static/urls.js"></script>
+    <script src="/static/common.js"></script>
+    
+    {% block scripts %}{% endblock %}
+</html>
