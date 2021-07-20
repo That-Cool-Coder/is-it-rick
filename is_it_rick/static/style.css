@@ -9,12 +9,10 @@ body, html {
 
 h1 {
     font-size: 38px;
-    margin: 0px;
 }
 
 h2 {
     font-size: 24px;
-    margin: 0px;
 }
 
 p {
@@ -37,17 +35,27 @@ p {
 }
 
 #topBar td {
-    padding: 0px;
-    vertical-align: bottom;
+    padding: 0px 20px 0px 20px;
+    vertical-align: center;
+}
+
+#registerRickRollButton {
+    text-decoration: none;
+    display: block;
+    border: 1px solid white;
+    padding: 3px;
+    font-size: 20px;
+    margin-bottom: 3px; /* for some reason the button always looks slightly too far down */
 }
 
 #slogan {
-    margin-left: 30px;
     margin-bottom: 3px; /* for some reason the slogan always looks slightly too far down */
 }
 
-#topBar h1, #topBar h2, #topBar p {
+#topBar * {
     color: #f6f6f6;
+    background: none;
+    margin: 0px;
 }
 
 #mainDiv {
