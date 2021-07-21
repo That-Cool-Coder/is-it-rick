@@ -1,4 +1,9 @@
 const urlInput = spnr.dom.id('urlInput');
+const outputParagraph = spnr.dom.id('outputParagraph');
+const warningParagraph = spnr.dom.id('warningParagraph');
+
+const successText = `Successfully added URL.
+Until it is approved by a moderator, it will appear as unverified.`
 
 urlInput.addEventListener('keypress', event => {
     // Enter pressed
@@ -12,17 +17,14 @@ async function registerRickRoll() {
     if (url != '') {
         var response = await basicPost(urls.backend.registerRickRoll, {url : url});
         var json = await response.json();
-        switch (json.status) {
-            case Status.OK:
-                alert('Ok');
-                console.log(json);
-                break;
-            case Status.WARNING:
-                alert(json.status_code);
-                break;
-            case Status.ERROR:
-                showResponseError(json.status_code);
-                break;
+
+        if (json.status == Status.OK) {
+            showOnlyOutputElement(outputParagraph, warningParagraph);
+            
+            outputParagraph.innerText = successText;
+        }
+        else {
+            showResponseStatusCode(json, outputParagraph, warningParagraph);
         }
     }
     else {

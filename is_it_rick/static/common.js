@@ -39,36 +39,41 @@ function basicPost(url, data) {
     });
 }
 
-function showWarning(warningText, warningOutput, errorOutput=warningOutput) {
-    errorOutput.style.display = 'none';
-    warningOutput.style.display = 'initial';
-    warningOutput.innerText = warningText;
+function showWarning(warningText, outputElement, warningElement, errorElement=warningElement) {
+    outputElement.style.display = 'none';
+    errorElement.style.display = 'none';
+    warningElement.style.display = 'initial';
+    warningElement.innerText = warningText;
 }
 
-function showError(errorText, warningOutput, errorOutput=warningOutput) {
-    warningOutput.style.display = 'none';
-    errorOutput.style.display = 'initial';
-    errorOutput.innerText = errorText;   
+function showError(errorText, outputElement, warningElement, errorElement=warningElement) {
+    outputElement.style.display = 'none';
+    warningElement.style.display = 'none';
+    errorElement.style.display = 'initial';
+    errorElement.innerText = errorText;   
 }
 
-function hideWarningErrorOutput(warningOutput, errorOutput=warningOutput) {
-    warningOutput.style.display = 'none';
-    errorOutput.style.display = 'none';
+function showOnlyOutputElement(outputElement, warningElement, errorElement=warningElement) {
+    outputElement.style.display = 'initial';
+    warningElement.style.display = 'none';
+    errorElement.style.display = 'none';
 }
 
-function showResponseStatusCode(response, warningOutput, errorOutput=warningOutput) {
+function showResponseStatusCode(response, outputElement, warningElement, errorElement=warningElement) {
     // Show the user the any errors or warnings using the DOM.
     // If everything is OK then it shows nothing.
 
     switch(response.status) {
         case Status.OK:
-            hideWarningErrorOutput(warningOutput, errorOutput);
+            showOnlyOutputElement(outputElement, warningElement, errorElement);
             break;
         case Status.WARNING:
-            showWarning(StatusCodeMessages[response.status_code], warningOutput, errorOutput);
+            showWarning(StatusCodeMessages[response.status_code], outputElement,
+                warningElement, errorElement);
             break;
         case Status.ERROR:
-            showError(StatusCodeMessages[response.status_code], warningOutput, errorOutput);
+            showError(StatusCodeMessages[response.status_code], outputElement,
+                warningElement, errorElement);
             break;
     }
 }

@@ -18,14 +18,15 @@ urlInput.addEventListener('keypress', event => {
 async function checkUrl() {
     var url = urlInput.value;
     if (url == '') {
-        showWarning('You must enter a URL', warningParagraph);
+        debugger;
+        showWarning('You must enter a URL', outputParagraph, warningParagraph);
     }
     else {
         var response = await basicPost(urls.backend.isItRick, {url : url});
         var json = await response.json();
         if (json.status == Status.OK) {
-            hideWarningErrorOutput(warningParagraph);
-            outputParagraph.style.display = 'initial';
+            showOnlyOutputElement(outputParagraph, warningParagraph);
+            
             if (json.verified && json.is_rick_roll) {
                 outputParagraph.innerText = verifiedRickRollText;
             }
@@ -37,8 +38,7 @@ async function checkUrl() {
             }
         }
         else {
-            outputParagraph.style.display = 'none';
-            showResponseStatusCode(json, warningParagraph);
+            showResponseStatusCode(json, outputParagraph, warningParagraph);
         }
     }
 }
