@@ -36,7 +36,7 @@ def api_is_it_rick():
 
         found_rick_roll = None
         for rick_roll in rick_rolls:
-            if rick_roll.url == sent_url:
+            if rick_roll.contains(url_str=sent_url):
                 found_rick_roll = rick_roll
                 break
         
@@ -69,13 +69,13 @@ def api_register_rick_roll():
         # First check that the URL is not already listed
         found_rick_roll = None
         for rick_roll in rick_rolls:
-            if rick_roll.url == sent_url:
+            if rick_roll.contains(url_str=sent_url):
                 found_rick_roll = rick_roll
                 break
         if found_rick_roll is not None:
             return create_response(Status.WARNING, StatusCode.URL_ALREADY_REGISTERED)
 
-        new_rick_roll = RickRoll(sent_url, False)
+        new_rick_roll = RickRoll(url_str=sent_url, verified=False)
         rick_rolls.append(new_rick_roll)
 
         save_rick_roll_database(rick_rolls)

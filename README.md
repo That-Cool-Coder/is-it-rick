@@ -201,6 +201,13 @@ Attributes:
 - `url` (string) - the URL that holds the Rick Roll
 - `verified` (boolean) - has this Rick Roll been verified by an administrator?
 
+###### `URL`
+
+This structure holds a URL and some functions that get info from it. It's mainly to make comparing URLs easier.
+
+Attriubutes:
+- `url` (string) - the actual URL that this object points to.
+
 ## Deployment
 
 (Only for Linux servers with Apache2 (aka httpd) - making this cross-platform is too hard)
