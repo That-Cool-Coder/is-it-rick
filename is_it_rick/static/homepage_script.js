@@ -17,43 +17,28 @@ urlInput.addEventListener('keypress', event => {
 
 async function checkUrl() {
     var url = urlInput.value;
-    if (url != '') {
-        var response = await basicPost(urls.backend.isItRick, {url : url});
-        var json = await response.json();
-        switch (json.status) {
-            case Status.OK:
-                outputParagraph.style.display = 'inline-block';
-                warningParagraph.style.display = 'none';
-                if (json.is_rick_roll) {
-                    if (json.verified) {
-                        outputParagraph.innerText = verifiedRickRollText;
-                    }
-                    else {
-                        outputParagraph.innerText = unverifiedRickRollText;
-                    } 
-                }
-                else {
-                    outputParagraph.innerText = noRickRollText;
-                }
-                break;
-            case Status.WARNING:
-                outputParagraph.style.display = 'none';
-                switch(json.status_code) {
-                    case StatusCode.INVALID_URL:
-                        warningParagraph.style.display = 'inline-block';
-                        warningParagraph.innerText = invalidUrlText;
-                        break;
-                    default:
-                        alert(json.status_code);
-                        break;
-                }
-                break;
-            case Status.ERROR:
-                showResponseError(json.status_code);
-                break;
-        }
+    if (url == '') {
+        showWarning('You must enter a URL', warningParagraph);
     }
     else {
-        alert('Must fill in URL input');
+        var response = await basicPost(urls.backend.isItRick, {url : url});
+        var json = await response.json();
+        if (json.status == Status.OK) {
+            hideWarningErrorOutput(warningParagraph);
+            outputParagraph.style.display = 'initial';
+            if (json.verified && json.is_rick_roll) {
+                outputParagraph.innerText = verifiedRickRollText;
+            }
+            else if (! json.verified && json.is_rick_roll) {
+                outputParagraph.innerText = unverifiedRickRollText;
+            } 
+            else {
+                outputParagraph.innerText = noRickRollText;
+            }
+        }
+        else {
+            outputParagraph.style.display = 'none';
+            showResponseStatusCode(json, warningParagraph);
+        }
     }
 }

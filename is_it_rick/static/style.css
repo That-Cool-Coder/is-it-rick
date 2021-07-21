@@ -1,9 +1,14 @@
+:root {
+    --darkRed: #ce2b16;
+    --lightGrey: #f6f6f6
+}
+
 * {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 body, html {
-    background-color: #f6f6f6;
+    background-color: var(--lightGrey);
     margin: 0px;
 }
 
@@ -15,8 +20,16 @@ h2 {
     font-size: 24px;
 }
 
-p {
+p, input, button {
     font-size: 16px;
+}
+
+button {
+    background-color: var(--darkRed);
+    color: var(--lightGrey);
+    border: 2px solid var(--lightGrey);
+    padding: 3px;
+    border-radius: 5px;
 }
 
 .noUnderline {
@@ -28,10 +41,16 @@ p {
 }
 
 #topBar {
-    background-color: #ce2b16;
+    background-color: var(--darkRed);
     display: block;
+}
+
+#title, #slogan {
+    color: var(--lightGrey);
+    background: none;
     margin: 0px;
-    padding: 10px;
+    padding: 0px;
+    border: 0px;
 }
 
 #topBar td {
@@ -39,28 +58,19 @@ p {
     vertical-align: center;
 }
 
-#registerRickRollButton {
+.navigationButton {
     text-decoration: none;
-    display: block;
+    display: inline-block;
     border: 1px solid white;
     padding: 3px;
-    font-size: 20px;
-    margin-bottom: 3px; /* for some reason the button always looks slightly too far down */
-}
-
-#slogan {
-    margin-bottom: 3px; /* for some reason the slogan always looks slightly too far down */
-}
-
-#topBar * {
-    color: #f6f6f6;
-    background: none;
-    margin: 0px;
+    margin-top: 10px;
+    color: var(--darkRed);
+    background-color: #f6f6f6;
 }
 
 #mainDiv {
     width: 80vw;
-    height: 70vh;
+    height: 60vh;
 
     /* center div */
     /* needs work - div easily goes too high on smallish screens */
