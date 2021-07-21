@@ -1,4 +1,9 @@
-RICK_ROLL_DATABASE_FILE = '/var/www/is_it_rick_data/rick_rolls.json'
+DEBUG = True
+
+#RICK_ROLL_DATABASE_FILE = '/var/www/is_it_rick_data/rick_rolls.json'
+RICK_ROLL_DATABASE_FILE = 'C:\\Users\\SirPies (Ravi)\\Documents\\Coding\\is-it-rick\\rick_rolls.json'
+
+DATABASE_READ_INTERVAL = 10
 
 API_BASE_URL = '/api/'
 

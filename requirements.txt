@@ -1,0 +1,4 @@
+flask
+flask-error-templating
+validators
+jsonpickle

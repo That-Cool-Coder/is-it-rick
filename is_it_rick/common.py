@@ -3,7 +3,7 @@ from enum import Enum
 from flask import jsonify
 import validators
 
-from is_it_rick import errors
+from is_it_rick import errors, config
 
 class Status(Enum):
     OK = 'OK'
@@ -36,3 +36,7 @@ def create_response(status=Status.OK, status_code=StatusCode.OK, **kwargs):
 
 def url_valid(url: str):
     return validators.url(url)
+
+def raiseIfDebug(exception: BaseException):
+    if config.DEBUG:
+        raise exception

@@ -9,3 +9,7 @@ class RickRoll:
     def __eq__(self, other):
         '''Equals method for easy checking'''
         return self.__dict__ == other.__dict__
+    
+    @staticmethod
+    def from_dict(data: dict):
+        return RickRoll(data['url', data['verified']])

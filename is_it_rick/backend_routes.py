@@ -1,4 +1,6 @@
 import urllib.parse
+import threading
+import time
 
 from flask import *
 
@@ -6,13 +8,18 @@ from is_it_rick.main import app
 from is_it_rick import config, errors
 from is_it_rick.common import *
 from is_it_rick.data_structures import *
+from is_it_rick.data_loading import *
 
-# temporary list for testing
-rick_rolls = [
-    RickRoll('http://rickroll.com', False),
-    RickRoll('http://storage.calbabreaker.repl.co/secret.mp4', True),
-    RickRoll('https://storage.calbabreaker.repl.co/secret.mp4', True),
-]
+rick_rolls = []
+
+def start_background_tasks():
+    threading.Thread(target=database_read_loop, daemon=True).start()
+
+def database_read_loop():
+    global rick_rolls
+    while True:
+        rick_rolls = load_rick_roll_database()
+        time.sleep(config.DATABASE_READ_INTERVAL)
 
 @app.route(urllib.parse.urljoin(config.API_BASE_URL,
     'is_it_rick/'), methods=['POST'])
@@ -39,13 +46,15 @@ def api_is_it_rick():
             return create_response(is_rick_roll=True, verified=True)
         else:
             return create_response(is_rick_roll=True, verified=False)
-    except:
+    except BaseException as e:
+        raiseIfDebug(e)
         return create_response(Status.ERROR, StatusCode.UNKNOWN_ERROR)
 
 @app.route(urllib.parse.urljoin(config.API_BASE_URL,
     'register_rick_roll'), methods=['POST'])
 def api_register_rick_roll():
     '''Register a URL that leads to a Rick Roll'''
+    global rick_rolls
     if not request_fields_valid(['url'], request.json):
         return create_response(Status.WARNING, StatusCode.INVALID_REQUEST)
 
@@ -53,6 +62,9 @@ def api_register_rick_roll():
         sent_url = request.json['url']
         if not url_valid(sent_url):
             return create_response(Status.WARNING, StatusCode.INVALID_URL)
+
+        # Load the rick rolls straight from file to clear cache
+        rick_rolls = load_rick_roll_database()
 
         # First check that the URL is not already listed
         found_rick_roll = None
@@ -65,9 +77,12 @@ def api_register_rick_roll():
 
         new_rick_roll = RickRoll(sent_url, False)
         rick_rolls.append(new_rick_roll)
+
+        save_rick_roll_database(rick_rolls)
         
         return create_response()
     except errors.InvalidUrl:
         return create_response(Status.WARNING, StatusCode.INVALID_URL)
-    except:
+    except BaseException as e:
+        raiseIfDebug(e)
         return create_response(Status.ERROR, StatusCode.UNKNOWN_ERROR)

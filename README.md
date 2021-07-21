@@ -219,12 +219,12 @@ sudo apt-get install libApache2-mod-wsgi-py3 python-dev
 
 Step 3: Install python packages (You must use `sudo` or they won't be installed globally and therefore won't be available when the app is run):
 ```
-sudo -H pip3 install Flask flask-error-templating validators
+sudo -H pip3 install -r requirements.txt
 ```
 
 Step 4: Add a line to your server's config to make WSGI work (not sure yet)
 
-Step 5: Create a directory `/var/www/is_it_rick_data/` to hold the data. Set its permissions to everyone can read/write.
+Step 5: Create a directory `/var/www/is_it_rick_data/` to hold the data. Set its permissions to everyone can read/write (octal `0777`).
 
 Step 6: Run `is_it_rick/init_data_files.py` to setup the data files.
 

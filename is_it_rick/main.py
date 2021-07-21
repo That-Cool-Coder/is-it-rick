@@ -3,8 +3,11 @@ from flask_error_templating import ErrorPage, create_http_error_handlers
 
 app = Flask(__name__)
 
-from is_it_rick.frontend_routes import *
-from is_it_rick.backend_routes import *
+from is_it_rick import frontend_routes
+from is_it_rick import backend_routes
+
+def start_background_tasks():
+    backend_routes.start_background_tasks()
 
 create_http_error_handlers(app, [
     ErrorPage(400, 'Bad request'),
