@@ -41,7 +41,7 @@ All of the documentation for contributors is in this file. I've decided not to s
 
 #### In data and requests
 
-As the data and requests will be handled by multiple languages, there are multiple standards that could be used. To resolve this ambiguity, it is mandated that the naming guidelines in [PEP-8](https://www.python.org/dev/peps/pep-0008/) are used. 
+As the data and requests are handled by multiple languages, there are multiple standards that could be used. To resolve this ambiguity, it is mandated that the naming guidelines in [PEP-8](https://www.python.org/dev/peps/pep-0008/) are used. 
 
 #### Python
 
@@ -96,19 +96,25 @@ else {
 - Work on one feature/bugfix at a time and create a seperate commit for each feature/bugfix.
 - Write your commit messages in imperative mood as described [here](https://git.kernel.org/pub/scm/git/git.git/tree/Documentation/SubmittingPatches?id=HEAD#n133). Eg: `make homepage show users their likes` as opposed to `made homepage show users their likes`.
 
-## Planned features for initial release
+## Features
 
-The initial release will be quite limited as I want to get something working very quickly.
+The initial release is quite limited as I wanted to get something working very quickly.
+
+#### Implemented
 
 - People can quickly check whether a URL leads to a verified Rick Roll, an unverified Rick Roll or is safe.
 - People can submit a URL as a Rick Roll, and when the URL is checked by another person, it will show as unverified.
 - URLs can not be verified except through manipulation of the database by server administrators.
 
+#### Planned
+
+[nothing]
+
 ## Program architecture and organisation
 
 #### Framework
 
-Both the frontend and the backend will be served through Flask. While there are no frontend features in the initial release that require Flask, using Flask will make future growth easy.
+Both the frontend and the backend are served through Flask. While the frontend doesn't strictly need to use Flask, it makes the code neater and makes future growth easy.
 
 #### Entry point
 
@@ -142,7 +148,7 @@ To partially avoid this, each instance stores the data in variables, and every *
 
 ## Server/client communication protocols
 
-All data in both directions will be sent in JSON format. In addition to the main data, a `status` and a `status_code` must be returned in every response from the API.
+All data in both directions is sent in JSON format. In addition to the main data, a `status` and a `status_code` must be returned in every response from the API.
 
 #### Statuses
 
@@ -183,9 +189,9 @@ Returns:
 
 ## Data storage
 
-Note: this an abstract view of the data storage. For implementation details such as file location and how to actually load the data see [#Implementation information](#implementation-information).
+Note: this an abstract view of the data storage. For implementation details such as file location and how to actually load the data see [Implementation information](#implementation-information).
 
-The program's data is stored in JSON format. This section details the organisation and location of the data. For information on how it is loaded and saved, see [#Implementation information](#implementation-information).
+The program's data is stored in JSON format. This section details the organisation and location of the data. For information on how it is loaded and saved, see [Implementation information](#implementation-information).
 
 #### Data location
 
@@ -210,30 +216,35 @@ Attriubutes:
 
 ## Deployment
 
-(Only for Linux servers with Apache2 (aka httpd) - making this cross-platform is too hard)
+These instructions are only for Linux servers with Apache2 (aka httpd) - making this cross-platform is too hard. They're also for Ubuntu. Arch users might have to change directory names and config file locations.
 
 Prerequisites:
-- Python >= 3.6
+- Python >= 3.7
 - Pip
 - Apache2
 
-Step 1: Clone this repo into a directory (I am not sure what that would be yet).
+Step 1: Clone this repo into `/var/www/is-it-rick/`.
 
 Step 2: Install things needed for WSGI:
 ```
-sudo apt-get install libApache2-mod-wsgi-py3 python-dev
+sudo apt-get install libapache2-mod-wsgi-py3 python-dev
 ```
 
-Step 3: Install python packages (You must use `sudo` or they won't be installed globally and therefore won't be available when the app is run):
+Step 3: Install python packages (You must use `sudo -H` or they won't be installed globally and therefore won't be available when the app is run):
 ```
 sudo -H pip3 install -r requirements.txt
 ```
 
-Step 4: Add a line to your server's config to make WSGI work (not sure yet)
+Step 4: Add these lines to your site's config file (probably `/etc/apache2/sites-available/000-default-le-ssl.conf`):
+```
+WSGIScriptAlias /is-it-rick /var/www/is-it-rick/runner.wsgi
+WSGIDaemonProcess is-it-rick threads=4
+```
+You can modify the value of `threads` to optimise performance.
 
 Step 5: Create a directory `/var/www/is_it_rick_data/` to hold the data. Set its permissions to everyone can read/write (octal `0777`).
 
-Step 6: Run `is_it_rick/init_data_files.py` to setup the data files.
+Step 6: Run `init_data_files.py` to setup the data files.
 
 Step 7: Restart Apache2 (this might be different on your machine):
 ```

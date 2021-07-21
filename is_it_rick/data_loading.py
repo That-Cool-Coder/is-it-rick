@@ -18,7 +18,7 @@ def load_rick_roll_database() -> list:
 def save_rick_roll_database(rick_rolls: list):
     file = None
     try:
-        file = open(config.RICK_ROLL_DATABASE_FILE, 'w', encoding='utf-8')
+        file = open(config.RICK_ROLL_DATABASE_FILE, 'w+', encoding='utf-8')
         str_data = jsonpickle.encode(rick_rolls)
         file.write(str_data)
     finally:
