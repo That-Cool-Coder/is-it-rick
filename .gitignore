@@ -1,4 +1,5 @@
 rick_rolls.json
+venv/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

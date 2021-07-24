@@ -216,37 +216,67 @@ Attriubutes:
 
 ## Deployment
 
-These instructions are only for Linux servers with Apache2 (aka httpd) - making this cross-platform is too hard. They're also for Ubuntu. Arch users might have to change directory names and config file locations.
+These instructions are only for Linux servers with Apache2 (aka httpd) - making this cross-platform is too hard. Not all Linux systems are the same - public directory locations, filenames and program names are often different. This guide is written for Ubuntu; Arch users might have to adapt it.
 
 Prerequisites:
 - Python >= 3.7
 - Pip
 - Apache2
 
-Step 1: Clone this repo into `/var/www/is-it-rick/`.
+#### Step 1: Clone git repo
 
-Step 2: Install things needed for WSGI:
+Clone this repo into `/var/www/is-it-rick`.
+
+#### Step 2: Install packages needed for WSGI
+
+For Ubuntu:
 ```
-sudo apt-get install libapache2-mod-wsgi-py3 python-dev
+sudo apt-get install libapache2-mod-wsgi-py3 python-dev python3-venv
 ```
 
-Step 3: Install python packages (You must use `sudo -H` or they won't be installed globally and therefore won't be available when the app is run):
+#### Step 3: Setup Python virtual environment:
+
+Install `virtualenv` if you haven't done so already:
+```
+sudo -H pip3 install virtualenv
+```
+
+Activate the environment:
+```
+python3 -m venv venv
+```
+Enter the environment:
+```
+source venv/bin/activate
+```
+
+#### Step 4: Install Python packages
+
+Run this command from the virtual environment:
+
 ```
 sudo -H pip3 install -r requirements.txt
 ```
 
-Step 4: Add these lines to your site's config file (probably `/etc/apache2/sites-available/000-default-le-ssl.conf`):
-```
-WSGIScriptAlias /is-it-rick /var/www/is-it-rick/runner.wsgi
-WSGIDaemonProcess is-it-rick threads=4
-```
-You can modify the value of `threads` to optimise performance.
+#### Step 5: Update server config file
 
-Step 5: Create a directory `/var/www/is_it_rick_data/` to hold the data. Set its permissions to everyone can read/write (octal `0777`).
-
-Step 6: Run `init_data_files.py` to setup the data files.
-
-Step 7: Restart Apache2 (this might be different on your machine):
+Add these lines to your site's config file (probably `/etc/apache2/sites-available/000-default-le-ssl.conf`):
 ```
-sudo systemctl restart Apache2
+WSGIDaemonProcess is_it_rick user=www-data group=www-data threads=4 python-home=/var/www/is_it_rick/venv
+	WSGIScriptAlias /is_it_rick /var/www/is_it_rick/runner.wsgi
+```
+
+#### Step 6: Create data storage directory
+
+Create a directory called `/var/www/is_it_rick_data/` to hold the data. Set its permissions to everyone can read/write (octal `0777`).
+
+#### Step 7: Initialise database
+
+Run `init_data_files.py` to setup the data files.
+
+#### Step 8: Restart Apache2
+
+On Ubuntu, run this:
+```
+sudo systemctl restart apache2
 ```

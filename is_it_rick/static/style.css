@@ -1,6 +1,6 @@
 :root {
-    --darkRed: #ce2b16;
-    --lightGrey: #f6f6f6
+    --primary: #ce2b16;
+    --secondary: #f6f6f6
 }
 
 * {
@@ -8,7 +8,7 @@
 }
 
 body, html {
-    background-color: var(--lightGrey);
+    background-color: var(--secondary);
     margin: 0px;
 }
 
@@ -25,9 +25,9 @@ p, input, button {
 }
 
 button {
-    background-color: var(--darkRed);
-    color: var(--lightGrey);
-    border: 2px solid var(--lightGrey);
+    background-color: var(--primary);
+    color: var(--secondary);
+    border: 2px solid var(--secondary);
     padding: 3px;
     border-radius: 5px;
 }
@@ -41,12 +41,12 @@ button {
 }
 
 #topBar {
-    background-color: var(--darkRed);
+    background-color: var(--primary);
     display: block;
 }
 
 #title, #slogan {
-    color: var(--lightGrey);
+    color: var(--secondary);
     background: none;
     margin: 0px;
     padding: 0px;
@@ -64,7 +64,7 @@ button {
     border: 1px solid white;
     padding: 3px;
     margin-top: 10px;
-    color: var(--darkRed);
+    color: var(--primary);
     background-color: #f6f6f6;
 }
 
