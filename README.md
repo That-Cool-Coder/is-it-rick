@@ -227,11 +227,11 @@ Prerequisites:
 
 Clone this repo into `/var/www/is-it-rick`.
 
-#### Step 2: Install packages needed for WSGI
+#### Step 2: Install packages needed
 
 For Ubuntu:
 ```
-sudo apt-get install libapache2-mod-wsgi-py3 python-dev python3-venv
+sudo apt-get install python-dev python3-venv
 ```
 
 #### Step 3: Setup Python virtual environment:
@@ -250,12 +250,33 @@ Enter the environment:
 source venv/bin/activate
 ```
 
+#### Step 4: Install mod_wsgi
+
+Run this command from the virtual environment:
+
+```
+pip3 install mod_wsgi
+```
+
+Then add it to Apache by writing this into `/etc/apache2/mods-available/wsgi.load`. Make sure to substitute `python3.9` and all of the `39`s for the Python version in your virtual environment.
+
+```
+LoadModule wsgi_module "/var/www/is-it-rick/venv/lib/python3.9/site-packages/mod_wsgi/server/mod_wsgi-py39.cpython-39-x86_64-linux-gnu.so"
+WSGIPythonHome "/var/www/is-it-rick/venv"
+```
+
+Finally, make sure WSGI is enabled:
+
+```
+sudo a2enmod mod_wsgi
+```
+
 #### Step 4: Install Python packages
 
 Run this command from the virtual environment:
 
 ```
-sudo -H pip3 install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 #### Step 5: Update server config file
