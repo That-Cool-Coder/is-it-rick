@@ -1,7 +1,8 @@
 DEBUG = True
 VERSION = '1.0.0'
 
-APP_ROOT = '/is-it-rick/'
+FRONTEND_URL_PREFIX = '/is-it-rick/'
+BACKEND_URL_PREFIX = '/is-it-rick/api/'
 
 RICK_ROLL_DATABASE_FILE = '/var/www/is_it_rick_data/rick_rolls.json'
 

@@ -3,7 +3,7 @@
     <head>
         <title>{% block title %}{% endblock %} | Is It Rick?</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link rel="stylesheet" href="/static/style.css">
     </head>
 
     <body>
@@ -30,9 +30,9 @@
     </body>
 
     <!--<script src="https://unpkg.com/spnr/cdn/latest/spnr.min.js"></script>-->
-    <script src="{{ url_for('static', filename='spnr.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='urls.js') }}"></script>
-    <script src="{{ url_for('static', filename='common.js') }}"></script>
+    <script src="/static/spnr.min.js"></script>
+    <script src="/static/urls.js"></script>
+    <script src="/static/common.js"></script>
     
     {% block scripts %}{% endblock %}
 </html>

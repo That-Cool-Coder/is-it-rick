@@ -4,11 +4,13 @@ import time
 
 from flask import *
 
-from is_it_rick.main import app
 from is_it_rick import config, errors
 from is_it_rick.common import *
 from is_it_rick.data_structures import *
 from is_it_rick.data_loading import *
+
+blueprint = Blueprint('backend', __name__,
+    url_prefix=config.BACKEND_URL_PREFIX)
 
 rick_rolls = []
 
@@ -21,8 +23,7 @@ def database_read_loop():
         rick_rolls = load_rick_roll_database()
         time.sleep(config.DATABASE_READ_INTERVAL)
 
-@app.route(urllib.parse.urljoin(config.API_BASE_URL,
-    'is_it_rick/'), methods=['POST'])
+@blueprint.route('/is_it_rick/', methods=['POST'])
 def api_is_it_rick():
     '''Check if the given URL is a Rick Roll'''
 
@@ -50,8 +51,7 @@ def api_is_it_rick():
         raiseIfDebug(e)
         return create_response(Status.ERROR, StatusCode.UNKNOWN_ERROR)
 
-@app.route(urllib.parse.urljoin(config.API_BASE_URL,
-    'register_rick_roll'), methods=['POST'])
+@blueprint.route('/register_rick_roll/', methods=['POST'])
 def api_register_rick_roll():
     '''Register a URL that leads to a Rick Roll'''
     global rick_rolls
