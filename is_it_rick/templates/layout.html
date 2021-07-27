@@ -3,7 +3,7 @@
     <head>
         <title>{% block title %}{% endblock %} | Is It Rick?</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="/static/style.css">
+        <link rel="stylesheet" href="{{ base_url + 'static/style.css' }}">
     </head>
 
     <body>
@@ -19,8 +19,10 @@
                 </tr>
                 <tr>
                     <td id="navigationButtons">
-                        <a class="navigationButton" href="/">Homepage</a>
-                        <a class="navigationButton" href="/register-rick-roll/">Register rick roll</a>
+                        <a class="navigationButton"
+                            href="{{ base_url }}">Homepage</a>
+                        <a class="navigationButton"
+                            href="{{ base_url + 'register-rick-roll/' }}">Register rick roll</a>
                     </td>
                 </tr>
             </table>
@@ -30,9 +32,9 @@
     </body>
 
     <!--<script src="https://unpkg.com/spnr/cdn/latest/spnr.min.js"></script>-->
-    <script src="/static/spnr.min.js"></script>
-    <script src="/static/urls.js"></script>
-    <script src="/static/common.js"></script>
+    <script src="{{ base_url + 'static/spnr.min.js' }}"></script>
+    <script src="{{ base_url + 'static/urls.js' }}"></script>
+    <script src="{{ base_url + 'static/common.js' }}"></script>
     
     {% block scripts %}{% endblock %}
 </html>

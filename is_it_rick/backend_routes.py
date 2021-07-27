@@ -9,8 +9,7 @@ from is_it_rick.common import *
 from is_it_rick.data_structures import *
 from is_it_rick.data_loading import *
 
-blueprint = Blueprint('backend', __name__,
-    url_prefix=config.BACKEND_URL_PREFIX)
+blueprint = Blueprint('backend', __name__)
 
 rick_rolls = []
 

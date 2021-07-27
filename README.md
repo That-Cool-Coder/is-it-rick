@@ -146,6 +146,10 @@ The optimal solution to data loading and saving would be to have the data primar
 
 To partially avoid this, each instance stores the data in variables, and every *n* seconds reads it from file. When new data is added (or when data is to be modified), the existing data read from the file, the new data is added (or modifications performed) and then the updated data is written back to the file.
 
+#### Usage of URLs
+
+I tried to use Flask `url_for` to allow easy shifting of the app, but that was too difficult to get working. Instead `BASE_URL` is defined in `config.py`, and it is passed to all templates when rendered. Then URLs in the template can be written as so: `{{ base_url + 'static/script.js'}}`.
+
 ## Server/client communication protocols
 
 All data in both directions is sent in JSON format. In addition to the main data, a `status` and a `status_code` must be returned in every response from the API.
