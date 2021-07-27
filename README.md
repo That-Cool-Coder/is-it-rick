@@ -125,7 +125,8 @@ When requests arrive, Apache2 runs the app from the WSGI script - `runner.wsgi`.
 The actual program is located in the directory `is_it_rick`.
 
 List of non-meta files (in order of importance):
-- `main.py` is the main file in there and it doesn't do much except handle app creation and import other things.
+- `__main__.py` is a test runner. 
+- `main_app.py` is the main file in there and it doesn't do much except handle app creation and import other things.
 - `config.py` holds various global constants. It's arguable that the constants should be localised to the files that use the constants, but that would make finding the constants more difficult.
 - `common.py` holds things needed by the whole project, including data-loading and enums.
 - `errors.py` holds all of the custom exceptions for this app.

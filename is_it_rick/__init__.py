@@ -1,1 +1,1 @@
-from .__main__ import app, start_background_tasks
+from .main_app import app, start_background_tasks

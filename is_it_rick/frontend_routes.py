@@ -2,7 +2,7 @@ from flask import *
 
 from is_it_rick import config
 
-blueprint = Blueprint('frontend', __name__)
+blueprint = Blueprint('frontend', __name__, url_prefix=config.BASE_URL)
 
 @blueprint.route('/', methods=['GET'])
 def homepage():
