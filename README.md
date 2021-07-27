@@ -292,15 +292,15 @@ WSGIDaemonProcess is_it_rick user=www-data group=www-data threads=4
 	WSGIScriptAlias /is_it_rick /var/www/is_it_rick/runner.wsgi
 ```
 
-#### Step 6: Create data storage directory
+#### Step 7: Create data storage directory
 
 Create a directory called `/var/www/is_it_rick_data/` to hold the data. Set its permissions to everyone can read/write (octal `0777`).
 
-#### Step 7: Initialise database
+#### Step 8: Initialise database
 
 Run `init_data_files.py` to setup the data files.
 
-#### Step 8: Restart Apache2
+#### Step 9: Restart Apache2
 
 On Ubuntu, run this:
 ```
