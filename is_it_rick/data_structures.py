@@ -15,7 +15,6 @@ class URL:
     
     def is_sub_url(self, other_url):
         '''Return whether this is a sub-url of other_url'''
-        print(self.domain_name_and_path(), other_url.domain_name_and_path())
         return self.domain_name_and_path() in other_url.domain_name_and_path()
 
 class RickRoll:

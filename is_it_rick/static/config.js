@@ -1,9 +1,9 @@
 const config = {
-    production : false
+    production : true
 }
 
 if (config.production) {
-    config.base_url = 'is-it-rick/';
+    config.base_url = '/is-it-rick/';
 }
 else {
     config.base_url = '/';

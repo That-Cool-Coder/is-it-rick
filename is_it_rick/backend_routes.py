@@ -9,7 +9,7 @@ from is_it_rick.common import *
 from is_it_rick.data_structures import *
 from is_it_rick.data_loading import *
 
-blueprint = Blueprint('backend', __name__, url_prefix=config.BASE_URL)
+blueprint = Blueprint('backend', __name__)
 
 rick_rolls = []
 
@@ -22,7 +22,7 @@ def database_read_loop():
         rick_rolls = load_rick_roll_database()
         time.sleep(config.DATABASE_READ_INTERVAL)
 
-@blueprint.route('api/is_it_rick/', methods=['POST'])
+@blueprint.route('/api/is_it_rick/', methods=['POST'])
 def api_is_it_rick():
     '''Check if the given URL is a Rick Roll'''
 
@@ -50,7 +50,7 @@ def api_is_it_rick():
         raiseIfDebug(e)
         return create_response(Status.ERROR, StatusCode.UNKNOWN_ERROR)
 
-@blueprint.route('api/register_rick_roll/', methods=['POST'])
+@blueprint.route('/api/register_rick_roll/', methods=['POST'])
 def api_register_rick_roll():
     '''Register a URL that leads to a Rick Roll'''
     global rick_rolls

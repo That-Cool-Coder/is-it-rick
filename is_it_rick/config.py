@@ -1,4 +1,4 @@
-PRODUCTION = False
+PRODUCTION = True
 VERSION = '1.0.0'
 
 if PRODUCTION:

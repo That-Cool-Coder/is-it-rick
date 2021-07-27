@@ -276,7 +276,7 @@ Finally, make sure WSGI is enabled:
 sudo a2enmod mod_wsgi
 ```
 
-#### Step 4: Install Python packages
+#### Step 5: Install Python packages
 
 Run this command from the virtual environment:
 
@@ -284,11 +284,11 @@ Run this command from the virtual environment:
 pip3 install -r requirements.txt
 ```
 
-#### Step 5: Update server config file
+#### Step 6: Update server config file
 
 Add these lines to your site's config file (probably `/etc/apache2/sites-available/000-default-le-ssl.conf`):
 ```
-WSGIDaemonProcess is_it_rick user=www-data group=www-data threads=4 python-home=/var/www/is_it_rick/venv
+WSGIDaemonProcess is_it_rick user=www-data group=www-data threads=4
 	WSGIScriptAlias /is_it_rick /var/www/is_it_rick/runner.wsgi
 ```
 
