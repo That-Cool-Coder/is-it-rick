@@ -288,7 +288,7 @@ pip3 install -r requirements.txt
 
 Add these lines to your site's config file (probably `/etc/apache2/sites-available/000-default-le-ssl.conf`):
 ```
-WSGIDaemonProcess is_it_rick user=www-data group=www-data threads=4
+WSGIDaemonProcess is_it_rick user=www-data group=www-data threads=4 python-home=/var/www/is_it_rick/venv
 	WSGIScriptAlias /is_it_rick /var/www/is_it_rick/runner.wsgi
 ```
 
