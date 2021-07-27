@@ -1,7 +1,10 @@
 from flask import *
 from flask_error_templating import ErrorPage, create_http_error_handlers
 
-app = Flask(__name__)
+from is_it_rick import config
+
+app = Flask(__name__, instance_relative_config=True)
+app.config['APPLICATION_ROOT'] = config.APP_ROOT
 
 from is_it_rick import frontend_routes
 from is_it_rick import backend_routes
