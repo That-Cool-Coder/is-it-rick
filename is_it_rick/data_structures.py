@@ -4,6 +4,13 @@ class URL:
     '''A class storing a URL'''
     def __init__(self, url: str):
         self.url = url
+
+        # Try and get the attributes to make sure the URL is valid
+        try:
+            self.domain_name()
+            self.path()
+        except:
+            raise errors.InvalidUrl()
     
     def domain_name_and_path(self):
         '''Get domain name and file path of URL. EG: google.com/somevalue/'''
@@ -12,6 +19,10 @@ class URL:
     def domain_name(self):
         '''Get domain name of URL. EG: google.com'''
         return self.domain_name_and_path().split('/', 1)[0]
+    
+    def path(self):
+        '''Get path of url. EG: pages/main/hello.js'''
+        self.domain_name_and_path().split('/', 1)
     
     def is_sub_url(self, other_url):
         '''Return whether this is a sub-url of other_url'''

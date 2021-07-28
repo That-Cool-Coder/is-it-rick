@@ -34,9 +34,6 @@ def create_response(status=Status.OK, status_code=StatusCode.OK, **kwargs):
         **kwargs
     })
 
-def url_valid(url: str):
-    return validators.url(url)
-
 def raise_if_debug(exception: BaseException):
     if not config.PRODUCTION:
         raise exception

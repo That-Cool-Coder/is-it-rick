@@ -31,8 +31,6 @@ def api_is_it_rick():
 
     try:
         sent_url = request.json['url']
-        if not url_valid(sent_url):
-            return create_response(Status.WARNING, StatusCode.INVALID_URL)
 
         found_rick_roll = None
         for rick_roll in rick_rolls:
@@ -46,6 +44,9 @@ def api_is_it_rick():
             return create_response(is_rick_roll=True, verified=True)
         else:
             return create_response(is_rick_roll=True, verified=False)
+    # This will get thrown by URL object creation if invalid
+    except errors.InvalidUrl:
+        return create_response(Status.WARNING, StatusCode.INVALID_URL)
     except BaseException as e:
         raise_if_debug(e)
         return create_response(Status.ERROR, StatusCode.UNKNOWN_ERROR)
@@ -59,8 +60,6 @@ def api_register_rick_roll():
 
     try:
         sent_url = request.json['url']
-        if not url_valid(sent_url):
-            return create_response(Status.WARNING, StatusCode.INVALID_URL)
 
         # Load the rick rolls straight from file to clear cache
         rick_rolls = load_rick_roll_database()
@@ -80,6 +79,7 @@ def api_register_rick_roll():
         save_rick_roll_database(rick_rolls)
         
         return create_response()
+    # This will get thrown by URL object creation if invalid
     except errors.InvalidUrl:
         return create_response(Status.WARNING, StatusCode.INVALID_URL)
     except BaseException as e:
