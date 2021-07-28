@@ -47,7 +47,7 @@ def api_is_it_rick():
         else:
             return create_response(is_rick_roll=True, verified=False)
     except BaseException as e:
-        raiseIfDebug(e)
+        raise_if_debug(e)
         return create_response(Status.ERROR, StatusCode.UNKNOWN_ERROR)
 
 @blueprint.route('/api/register_rick_roll/', methods=['POST'])
@@ -83,5 +83,5 @@ def api_register_rick_roll():
     except errors.InvalidUrl:
         return create_response(Status.WARNING, StatusCode.INVALID_URL)
     except BaseException as e:
-        raiseIfDebug(e)
+        raise_if_debug(e)
         return create_response(Status.ERROR, StatusCode.UNKNOWN_ERROR)
