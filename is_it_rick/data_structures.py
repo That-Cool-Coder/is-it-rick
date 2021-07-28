@@ -3,7 +3,7 @@ from is_it_rick import errors
 class URL:
     '''A class storing a URL'''
     def __init__(self, url: str):
-        self.url = url
+        self.url = url.lower()
     
     def domain_name_and_path(self):
         '''Get domain name and file path of URL. EG: google.com/somevalue/'''
