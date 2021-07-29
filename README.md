@@ -214,6 +214,16 @@ Accepts:
 Returns:
 - `status` and `status_code`.
 
+#### `/api/sign_in` (planned)
+
+Accepts:
+- `username` (string) - the username of the account to sign in to
+- `password` (string) - the password of the account to sign in to
+
+Returns:
+- `session_id` (string) - session id for the user to use to perform future actions
+- `status` and `status_code`.
+
 ## Frontend views
 
 #### `/`
@@ -223,6 +233,14 @@ Homepage and main page of the app. Here, users can check if URLs are Rick Rolls.
 #### `/register-rick-roll/`
 
 A page where users can submit Rick Rolls to the database.
+
+#### `/manage/` (planned)
+
+Home page of managing Rick Rolls. Requires the client to be logged in and have a session id in their cookies.
+
+#### `/login/` (planned)
+
+...
 
 ## Data storage
 
