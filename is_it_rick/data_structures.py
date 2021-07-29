@@ -25,11 +25,19 @@ class URL:
     
     def path(self):
         '''Get path of url. EG: pages/main/hello.js'''
-        self.domain_name_and_path().split('/', 1)
+        sections = self.domain_name_and_path().split('/', 1)
+        if len(sections) == 1:
+            return ''
+        else:
+            return sections[1]
     
     def is_sub_url(self, other_url):
-        '''Return whether this is a sub-url of other_url'''
-        return self.domain_name_and_path() in other_url.domain_name_and_path()
+        '''Return whether this is a sub-url of other_url.
+        Similar to checking if a string is a substring.
+        '''
+        domain_name_matches = self.domain_name() == other_url.domain_name()
+        path_matches = self.path() in other_url.path()
+        return domain_name_matches and path_matches
 
 class RickRoll:
     '''A class storing a Rick Roll'''

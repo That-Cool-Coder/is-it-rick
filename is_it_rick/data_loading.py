@@ -2,7 +2,6 @@ import jsonpickle
 
 from is_it_rick import config
 from is_it_rick.data_structures import *
-from is_it_rick.data_loading import *
 
 def load_rick_roll_database() -> list:
     file = None
