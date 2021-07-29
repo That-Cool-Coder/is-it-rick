@@ -98,10 +98,11 @@ else {
 
 - Work on one feature/bugfix at a time and create a seperate commit for each feature/bugfix.
 - Write your commit messages in imperative mood as described [here](https://git.kernel.org/pub/scm/git/git.git/tree/Documentation/SubmittingPatches?id=HEAD#n133). Eg: `make homepage show users their likes` as opposed to `made homepage show users their likes`.
+- When creating a commit for a bugfix, format it like so: `fix #42`. This will make GitHub automatically close the issue it relates to.
 
 ## Features
 
-These are the "things" that 
+These are essentially the different actions 
 
 #### Implemented
 
@@ -225,8 +226,6 @@ A page where users can submit Rick Rolls to the database.
 
 ## Data storage
 
-Note: this an abstract view of the data storage. For implementation details such as file location and how to actually load the data see [Implementation information](#implementation-information).
-
 The program's data is stored in JSON format. This section details the organisation and location of the data. For information on how it is loaded and saved, see [Implementation information](#implementation-information).
 
 #### Data location
@@ -245,7 +244,7 @@ Attributes:
 
 ###### `URL`
 
-This structure holds a URL and some functions that get info from it. It's mainly to make comparing URLs easier.
+This structure holds a URL and some functions that get info from it. It's mainly to make comparing URLs and checking equivalence easier.
 
 Attriubutes:
 - `url` (string) - the actual URL that this object points to.

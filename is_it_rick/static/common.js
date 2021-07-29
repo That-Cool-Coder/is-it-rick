@@ -10,6 +10,7 @@ const StatusCode = {
     // StatusCodes that go with Status WARNING
     INVALID_URL : 'INVALID_URL',
     INVALID_REQUEST : 'INVALID_REQUEST',
+    URL_ALREADY_REGISTERED : 'URL_ALREADY_REGISTERED',
 
     // StatusCodes that go with Status ERROR
     UNKNOWN_ERROR : 'UNKNOWN_ERROR'
@@ -19,6 +20,7 @@ const StatusCodeMessages = {
     // Messages that go with Status WARNING
     [StatusCode.INVALID_URL] : 'The URL you entered is not a valid URL',
     [StatusCode.INVALID_REQUEST] : 'We are having difficulty communicating with the server',
+    [StatusCode.URL_ALREADY_REGISTERED] : 'That URL is already registered',
 
     // Messages that go with Status ERROR
     [StatusCode.UNKNOWN_ERROR] : 'Unknown server error'
