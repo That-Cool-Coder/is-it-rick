@@ -226,7 +226,7 @@ A page where users can submit Rick Rolls to the database.
 
 ## Data storage
 
-The program's data is stored in JSON format. This section details the organisation and location of the data. For information on how it is loaded and saved, see [Implementation information](#implementation-information).
+The program's data is stored in JSON (specifically `jsonpickle`) format. This section details the organisation and location of the data. For information on how it is loaded and saved, see [Implementation information](#implementation-information).
 
 #### Data location
 
@@ -239,8 +239,9 @@ The data is stored in the directory `/var/www/is_it_rick_data/`.
 This structure holds a record of a potential Rick Roll.
 
 Attributes:
-- `url` (string) - the URL that holds the Rick Roll
+- `url` (string) - the URL that holds the Rick Roll.
 - `verified` (boolean) - has this Rick Roll been verified by an administrator?
+- `description` (string) (unimplemented) - a user-provided description of this Rick Roll. Should be optional.
 
 ###### `URL`
 
@@ -248,6 +249,16 @@ This structure holds a URL and some functions that get info from it. It's mainly
 
 Attriubutes:
 - `url` (string) - the actual URL that this object points to.
+
+###### `User`
+
+This structure represents a person who has signed up to use this app. Currently, only users with admin permissions are going to be able to do anything, but having this optional will most likely be useful for future growth. 
+
+Attributes:
+- `name` (string) - a unique reference to the user.
+- `password_hash` (string) - the hash of the user's password.
+- `join_timestamp` (float) - time in seconds since the epoch when this user was created.
+- `admin` (boolean) - whether or not this user has admin permissions.
 
 ## Deployment
 
@@ -276,7 +287,7 @@ Install `virtualenv` if you haven't done so already:
 sudo -H pip3 install virtualenv
 ```
 
-Activate the environment:
+Create the environment:
 ```
 python3 -m venv venv
 ```
@@ -293,7 +304,7 @@ Run this command from the virtual environment:
 pip3 install mod_wsgi
 ```
 
-Then add it to Apache by writing this into `/etc/apache2/mods-available/wsgi.load`. Make sure to substitute `python3.9` and all of the `39`s for the Python version in your virtual environment.
+Then add it to Apache by writing this into `/etc/apache2/mods-available/wsgi.load`. Make sure to substitute `python3.9` and all of the `39`s for the Python version in your virtual environment. Yes it is suboptimal linking to a shared object in the (easily deletable) virtual environment; this needs improving.
 
 ```
 LoadModule wsgi_module "/var/www/is-it-rick/venv/lib/python3.9/site-packages/mod_wsgi/server/mod_wsgi-py39.cpython-39-x86_64-linux-gnu.so"

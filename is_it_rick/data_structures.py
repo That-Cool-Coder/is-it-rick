@@ -1,3 +1,5 @@
+import time
+
 from is_it_rick import errors
 
 class URL:
@@ -60,3 +62,16 @@ class RickRoll:
             return self.url.is_sub_url(URL(url_str))
         else:
             raise errors.NoUrlProvided()
+
+class User:
+    '''A class storing a user of the application.
+    Currently only admin users have any abilities
+    '''
+    def __init__(self, name: str, password_hash: str,
+        join_timestamp: int = None, admin: bool = False):
+        self.name = name
+        self.password_hash = password_hash
+        if join_timestamp is None:
+            join_timestamp = time.time()
+        self.join_timestamp = join_timestamp
+        self.admin = admin
