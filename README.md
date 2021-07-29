@@ -11,8 +11,11 @@ Rick Roll detector website written in Python with Flask.
 - [Planned features for initial release](#planned-features-for-initial-release)
 - [Program architecture and organisation](#program-architecture-and-organisation)
 - [Implementation information](#implementation-information)
+- [Running the development server](#running-the-development-server)
+- [Switching between development and production](#switching-between-development-and-production)
 - [Server/client communication protocols](#serverclient-communication-protocols)
 - [API](#api)
+- [Frontend views](#frontend-views)
 - [Data storage](#data-storage)
 - [Deployment](#deployment)
 
@@ -98,7 +101,7 @@ else {
 
 ## Features
 
-The initial release is quite limited as I wanted to get something working very quickly.
+These are the "things" that 
 
 #### Implemented
 
@@ -108,13 +111,17 @@ The initial release is quite limited as I wanted to get something working very q
 
 #### Planned
 
-[nothing]
+- Admin accounts exist
+- Admin accounts can be created from a command line utilty
+- There is a set of managment pages that admins can access
+- In the management pages, Rick Rolls can be verified
+- In the management pages, fake Rick Rolls can be deleted
 
 ## Program architecture and organisation
 
 #### Framework
 
-Both the frontend and the backend are served through Flask. While the frontend doesn't strictly need to use Flask, it makes the code neater and makes future growth easy.
+Both the frontend and the backend are served through Flask. While the frontend doesn't strictly need to use Flask, it makes the code neater and makes future growth easy. `flask-error-templating` is used to automatically create HTTP  error handlers.
 
 #### Entry point
 
@@ -150,6 +157,20 @@ To partially avoid this, each instance stores the data in variables, and every *
 #### Usage of URLs
 
 I tried to use Flask `url_for` to allow easy shifting of the app, but that was too difficult to get working. Instead `BASE_URL` is defined in `config.py`, and it is passed to all templates when rendered. Then URLs in the template can be written as so: `{{ base_url + 'static/script.js'}}`.
+
+## Running the development server
+
+To run the app using Flask's inbuilt Werkzeug server, run `python3 -m is_it_rick` from the root directory of this project.
+
+If you get an error such as `No module named is_it_rick/`, make sure you're using `-m` and make sure that there is no trailing slash on the module name.
+
+## Switching between development and production
+
+In production, the app is designed to be located in a subdirectory of the main server. However, in development it instead runs off the root of a port. This means that the URLs for assets, scripts and API calls are different depending on whether the app is in development or production.
+
+To switch between these modes, there are booleans called `production` in the config files of the frontend and backend. These files are `is_it_rick/static/config.js` and `is_it_rick/config.py` respectively. Changing the value of `production` will change the value of URLs in config to match the environment.
+
+Currently, these two files are not ignored by git, so you will need to set them back to their initial values (preferably to production mode) before pushing to GitHub. In future, a system for storing this on the local machine will be created.
 
 ## Server/client communication protocols
 
@@ -191,6 +212,16 @@ Accepts:
 
 Returns:
 - `status` and `status_code`.
+
+## Frontend views
+
+#### `/`
+
+Homepage and main page of the app. Here, users can check if URLs are Rick Rolls. 
+
+#### `/register-rick-roll/`
+
+A page where users can submit Rick Rolls to the database.
 
 ## Data storage
 
