@@ -14,7 +14,10 @@ class URL:
     
     def domain_name_and_path(self):
         '''Get domain name and file path of URL. EG: google.com/somevalue/'''
-        return self.url.split('://', 1)[1]
+        domain_name_and_path = self.url.split('://', 1)[1]
+        if domain_name_and_path.startswith('www.'):
+            domain_name_and_path = domain_name_and_path.replace('www.', '', 1)
+        return domain_name_and_path
     
     def domain_name(self):
         '''Get domain name of URL. EG: google.com'''
