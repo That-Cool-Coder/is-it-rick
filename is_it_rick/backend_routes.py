@@ -7,7 +7,7 @@ from flask import *
 from is_it_rick import config, errors
 from is_it_rick.common import *
 from is_it_rick.data_structures import *
-from is_it_rick.data_loading import *
+from is_it_rick.data_loading import load_database, save_database
 
 blueprint = Blueprint('backend', __name__)
 
@@ -20,7 +20,8 @@ def start_background_tasks():
 def database_read_loop():
     global rick_rolls
     while True:
-        rick_rolls = load_rick_roll_database()
+        rick_rolls = load_database(config.RICK_ROLL_DATABASE_FILE)
+        users = load_database(config.USER_DATABASE_FILE)
         time.sleep(config.DATABASE_READ_INTERVAL)
 
 @blueprint.route('/api/is_it_rick/', methods=['POST'])
@@ -63,7 +64,7 @@ def api_register_rick_roll():
         sent_url = request.json['url']
 
         # Load the rick rolls straight from file to clear cache
-        rick_rolls = load_rick_roll_database()
+        rick_rolls = load_database(config.RICK_ROLL_DATABASE_FILE)
 
         # First check that the URL is not already listed
         found_rick_roll = None
@@ -77,7 +78,7 @@ def api_register_rick_roll():
         new_rick_roll = RickRoll(url_str=sent_url, verified=False)
         rick_rolls.append(new_rick_roll)
 
-        save_rick_roll_database(rick_rolls)
+        save_database(config.RICK_ROLL_DATABASE_FILE, rick_rolls)
         
         return create_response()
     # This will get thrown by URL object creation if invalid

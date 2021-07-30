@@ -179,6 +179,7 @@ These are the values settable in `local_config.py`. Note that they must ALL be s
 - `PRODUCTION` (boolean) - whether this is a production or development environment. Defaults to `True`
 - `BASE_URL` (string) - the base URL that the WSGI is routed through, as set in your site's config. Defaults to `/`.
 - `RICK_ROLL_DATABASE_FILE` (string) - the file that the Rick Rolls are stored in. Defaults to `/var/www/is_it_rick_data/rick_rolls.json`.
+- `USER_DATABASE_FILE` (string) - the file that the Users are stored in. Defaults to `/var/www/is_it_rick_data/users.json`.
 - `TESTING_PORT` (integer) - the port of the computer to use for hosting the development server. Only used if `PRODUCTION` is `False`. Defaults to `5000`.
 
 #### `localConfig.js`
