@@ -1,13 +1,16 @@
+import os.path
+
 try:
     from is_it_rick.local_config import PRODUCTION, \
-        BASE_URL, RICK_ROLL_DATABASE_FILE, USER_DATABASE_FILE, \
-        TESTING_PORT
+        BASE_URL, DATABASE_DIRECTORY, TESTING_PORT
 except:
     PRODUCTION = True
     BASE_URL = '/'
-    RICK_ROLL_DATABASE_FILE = '/var/www/is_it_rick_data/rick_rolls.json'
-    USER_DATABASE_FILE = 'var/www/is_it_rick_data/users.json'
+    DATABASE_DIRECTORY = '/var/www/is_it_rick_data/'
     TESTING_PORT = 5000
+
+RICK_ROLL_DATABASE_FILE = os.path.join(DATABASE_DIRECTORY, 'rick_rolls.json')
+USER_DATABASE_FILE = os.path.join(DATABASE_DIRECTORY, 'users.json')
 
 VERSION = '1.1.0-beta'
 APP_NAME = 'Is It Rick?'
