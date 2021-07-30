@@ -12,6 +12,7 @@ passwordInput.addEventListener('keypress', event => {
 
 async function signIn() {
     var username = usernameInput.value;
+    var password = passwordInput.value;
     if (username == '' || password == '') {
         showWarning('You must enter a username and password',
             outputParagraph, warningParagraph);

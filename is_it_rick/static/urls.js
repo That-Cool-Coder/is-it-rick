@@ -5,6 +5,7 @@ const urls = {
     },
     backend : {
         isItRick : config.baseUrl + 'api/is_it_rick/',
-        registerRickRoll : config.baseUrl + 'api/register_rick_roll/'
+        registerRickRoll : config.baseUrl + 'api/register_rick_roll/',
+        signIn : config.baseUrl + 'api/sign_in'
     }
 }

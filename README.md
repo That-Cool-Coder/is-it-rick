@@ -301,13 +301,13 @@ Attributes:
 - `join_timestamp` (float) - time in seconds since the epoch when this user was created.
 - `admin` (boolean) - whether or not this user has admin permissions.
 
-###### `SessionId` (planned)
+###### `SessionId`
 
 This structure represents a session id used to perform actions once signed in.
 
 Attributes:
 - `value` (string) - a unique string that is the value of the ID.
-- `username` (string) - name of the user that it belongs to.
+- `user_name` (string) - name of the user that it belongs to.
 - `expiry_time` (float) - time in seconds since the epoch that this ID will expire.
 
 ## Deployment

@@ -75,3 +75,16 @@ class User:
             join_timestamp = time.time()
         self.join_timestamp = join_timestamp
         self.admin = admin
+
+class SessionId:
+    '''A class storing a session id.
+
+    Session ids are obtained by signing in and are then used to perform actions.
+
+    In addition to the id itself, this class contains information on who the id
+    belongs to and when it expires.
+    '''
+    def __init__(self, value: str, user_name: str, expiry_time: float):
+        self.value = value
+        self.user_name = user_name
+        self.expiry_time = expiry_time

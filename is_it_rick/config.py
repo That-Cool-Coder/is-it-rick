@@ -11,6 +11,7 @@ except:
 
 RICK_ROLL_DATABASE_FILE = os.path.join(DATABASE_DIRECTORY, 'rick_rolls.json')
 USER_DATABASE_FILE = os.path.join(DATABASE_DIRECTORY, 'users.json')
+SESSION_ID_DATABASE_FILE = os.path.join(DATABASE_DIRECTORY, 'session_ids.json')
 
 VERSION = '1.1.0-beta'
 APP_NAME = 'Is It Rick?'
