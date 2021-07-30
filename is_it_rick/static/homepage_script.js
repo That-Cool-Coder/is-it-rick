@@ -2,6 +2,11 @@ const urlInput = spnr.dom.id('urlInput');
 const outputParagraph = spnr.dom.id('outputParagraph');
 const warningParagraph = spnr.dom.id('warningParagraph');
 
+const verifiedRickRollText = 'This URL leads to a Rick Roll (verified)';
+const unverifiedRickRollText = 'This URL leads to a Rick Roll (unverified)';
+const noRickRollText = `This URL should not lead to a Rick Roll.
+If you do find that it leads to a Rick Roll, please register it on this site.`;
+
 urlInput.addEventListener('keypress', event => {
     // Enter pressed
     if (event.keyCode == 13) {
