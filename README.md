@@ -12,7 +12,7 @@ Rick Roll detector website written in Python with Flask.
 - [Program architecture and organisation](#program-architecture-and-organisation)
 - [Implementation information](#implementation-information)
 - [Running the development server](#running-the-development-server)
-- [Switching between development and production](#switching-between-development-and-production)
+- [Local config](#local-config)
 - [Server/client communication protocols](#serverclient-communication-protocols)
 - [API](#api)
 - [Frontend views](#frontend-views)
@@ -135,7 +135,8 @@ The actual program is located in the directory `is_it_rick`.
 List of non-meta files (in order of importance):
 - `__main__.py` is a test runner. 
 - `main_app.py` is the main file in there and it doesn't do much except handle app creation and import other things.
-- `config.py` holds various global constants. It's arguable that the constants should be localised to the files that use the constants, but that would make finding the constants more difficult.
+- `config.py` holds global constants that won't change between environments. It also handles setting the defaults of `local_config.py`.
+- `local_config.py` holds environment-specific configuration. It is gitignored. For more info see [Local config]($local-config).
 - `common.py` holds things needed by the whole project, including data-loading and enums.
 - `errors.py` holds all of the custom exceptions for this app.
 - `frontend_routes.py` defines all of the Flask routes for pages on the frontend.
@@ -165,13 +166,27 @@ To run the app using Flask's inbuilt Werkzeug server, run `python3 -m is_it_rick
 
 If you get an error such as `No module named is_it_rick/`, make sure you're using `-m` and make sure that there is no trailing slash on the module name.
 
-## Switching between development and production
+## Local configuration
 
-In production, the app is designed to be located in a subdirectory of the main server. However, in development it instead runs off the root of a port. This means that the URLs for assets, scripts and API calls are different depending on whether the app is in development or production.
+In production, the app is designed to be located in a subdirectory of the main server. However, in development it instead runs off the root of a port. This means that the URLs for assets, scripts and API calls are different depending on whether the app is in development or production. In addition, different computers might have different filesystems, which would mean different locations for storing the data.
 
-To switch between these modes, there are booleans called `production` in the config files of the frontend and backend. These files are `is_it_rick/static/config.js` and `is_it_rick/config.py` respectively. Changing the value of `production` will change the value of URLs in config to match the environment.
+To facilitate these changes, there are a pair of local config files: `is_it_rick/local_config.py` and `is_it_rick/static/localConfig.js`. These files are gitignored and contain all the local config data. They are optional and the files named `config` in those directories will substitute default values if the local config files are missing.
 
-Currently, these two files are not ignored by git, so you will need to set them back to their initial values (preferably to production mode) before pushing to GitHub. In future, a system for storing this on the local machine will be created.
+#### `local_config.py`
+
+These are the values settable in `local_config.py`. Note that they must ALL be set or they will ALL be set to default values.
+
+- `PRODUCTION` (boolean) - whether this is a production or development environment. Defaults to `True`
+- `BASE_URL` (string) - the base URL that the WSGI is routed through, as set in your site's config. Defaults to `/`.
+- `RICK_ROLL_DATABASE_FILE` (string) - the file that the Rick Rolls are stored in. Defaults to `/var/www/is_it_rick_data/rick_rolls.json`.
+- `TESTING_PORT` (integer) - the port of the computer to use for hosting the development server. Only used if `PRODUCTION` is `False`. Defaults to `5000`.
+
+#### `localConfig.js`
+
+These are the values settable in `localConfig.js`. Note that they must ALL be set or they will ALL be set to default values.
+- `production` (boolean) - whether this is a production or development environment. Defaults to `true`.
+- `baseUrl` (string) - the base URL that the WSGI is routed through, as set in your site's config. Defaults to `/`.
+
 
 ## Server/client communication protocols
 
@@ -280,7 +295,7 @@ Attributes:
 
 ## Deployment
 
-These instructions are only for Linux servers with Apache2 (aka httpd) - making this cross-platform is too hard. Not all Linux systems are the same - public directory locations, filenames and program names are often different. This guide is written for Ubuntu; Arch users might have to adapt it.
+These instructions are only for Linux servers with Apache2 (aka httpd) - making this cross-platform is too hard. Not all Linux systems are the same - public directory locations, filenames and program names are often different. This guide is written for Ubuntu; Arch users might have to adapt.
 
 Prerequisites:
 - Python >= 3.7

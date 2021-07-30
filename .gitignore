@@ -1,5 +1,7 @@
 venv/*
 testing_data/*
+is_it_rick/local_config.py
+is_it_rick/static/localConfig.js
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
