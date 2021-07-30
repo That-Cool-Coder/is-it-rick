@@ -264,7 +264,15 @@ The program's data is stored in JSON (specifically `jsonpickle`) format. This se
 
 #### Data location
 
-The data is stored in the directory `/var/www/is_it_rick_data/`.
+By default, the data is stored in the directory `/var/www/is_it_rick_data/`, although this can be configured. See [Local config](#local-config) for more information.
+
+#### Databases
+
+This is a list of all of the data files used in this program.
+
+- `rick_rolls.json` - this file holds the list of `RickRoll` data structures.
+- `users.json` - this file holds the list of `User` data structures.
+- `session_ids.json` (planned) - this file holds the list of `SessionId` data structures. The `SessionId`s could also be made local to the users that the belong to but this is more compilcated and probably less efficient.
 
 #### Data structures
 
@@ -293,6 +301,15 @@ Attributes:
 - `password_hash` (string) - the hash of the user's password.
 - `join_timestamp` (float) - time in seconds since the epoch when this user was created.
 - `admin` (boolean) - whether or not this user has admin permissions.
+
+###### `SessionId` (planned)
+
+This structure represents a session id used to perform actions once signed in.
+
+Attributes:
+- `value` (string) - a unique string that is the value of the ID.
+- `username` (string) - name of the user that it belongs to.
+- `expiry_time` (float) - time in seconds since the epoch that this ID will expire.
 
 ## Deployment
 
