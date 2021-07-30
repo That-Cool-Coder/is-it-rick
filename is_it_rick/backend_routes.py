@@ -12,6 +12,7 @@ from is_it_rick.data_loading import *
 blueprint = Blueprint('backend', __name__)
 
 rick_rolls = []
+users = []
 
 def start_background_tasks():
     threading.Thread(target=database_read_loop, daemon=True).start()

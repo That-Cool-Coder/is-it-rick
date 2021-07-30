@@ -1,7 +1,6 @@
 from enum import Enum
 
 from flask import jsonify
-import validators
 
 from is_it_rick import errors, config
 
