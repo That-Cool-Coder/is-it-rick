@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+{% block title %}Sign In{% endblock %}
+
+{% block content %}
+<h2>Sign in</h2>
+<p>Signing in allows you to verify or delete Rick Rolls.</p>
+<br>
+<input id="username" placeholder="Username">
+<br>
+<br>
+<input id="passwordInput" type="password" placeholder="pasword">
+<br>
+<br>
+<button onclick="signIn()">Sign in</button>
+<br>
+<br>
+<p id="outputParagraph" hidden></p>
+<p id="warningParagraph" hidden></p>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ base_url + 'static/sign_in_script.js' }}"></script>
+{% endblock %}

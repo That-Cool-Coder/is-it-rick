@@ -3,7 +3,7 @@ const outputParagraph = spnr.dom.id('outputParagraph');
 const warningParagraph = spnr.dom.id('warningParagraph');
 
 const successText = `Successfully added URL.
-Until it is approved by a moderator, it will appear as unverified.`
+Until it is approved by a moderator, it will appear as unverified.`;
 
 urlInput.addEventListener('keypress', event => {
     // Enter pressed

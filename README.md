@@ -240,7 +240,7 @@ Home page of managing Rick Rolls. Requires the client to be logged in and have a
 
 #### `/login/` (planned)
 
-...
+A page where clients can login and get a session id for managing things. Accepts url parameter `return_url`, which is where clients are sent to after a successful login.
 
 ## Data storage
 

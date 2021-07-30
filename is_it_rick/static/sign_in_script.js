@@ -1,21 +1,24 @@
-const urlInput = spnr.dom.id('urlInput');
+const usernameInput = spnr.dom.id('usernameInput');
+const passwordInput = spnr.dom.id('passwordInput');
 const outputParagraph = spnr.dom.id('outputParagraph');
 const warningParagraph = spnr.dom.id('warningParagraph');
 
-urlInput.addEventListener('keypress', event => {
+passwordInput.addEventListener('keypress', event => {
     // Enter pressed
     if (event.keyCode == 13) {
-        checkUrl();
+        signIn();
     }
 });
 
-async function checkUrl() {
-    var url = urlInput.value;
-    if (url == '') {
-        showWarning('You must enter a URL', outputParagraph, warningParagraph);
+async function signIn() {
+    var username = usernameInput.value;
+    if (username == '' || password == '') {
+        showWarning('You must enter a username and password',
+            outputParagraph, warningParagraph);
     }
     else {
-        var response = await basicPost(urls.backend.isItRick, {url : url});
+        var response = await basicPost(urls.backend.signIn,
+            {username : username, password : password});
         var json = await response.json();
         if (json.status == Status.OK) {
             showOnlyOutputElement(outputParagraph, warningParagraph);

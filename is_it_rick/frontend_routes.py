@@ -11,3 +11,7 @@ def homepage():
 @blueprint.route('/register-rick-roll/', methods=['GET'])
 def register_rick_roll():
     return render_template('register_rick_roll.html', base_url=config.BASE_URL)
+
+@blueprint.route('/sign-in/', methods=['GET'])
+def sign_in():
+    return render_template('sign_in.html', base_url=config.BASE_URL)
