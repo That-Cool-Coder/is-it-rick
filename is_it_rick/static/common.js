@@ -81,3 +81,10 @@ function showResponseStatusCode(response, outputElement, warningElement, errorEl
             break;
     }
 }
+
+function goToSignInPage() {
+    // Go to the sign in page and then return to the original page
+    var crntPath = encodeURIComponent(window.location.pathname);
+    window.location.href = `${window.location.protocol}//${window.location.host}` +
+        `${urls.frontend.signIn}?return_url=${crntPath}`;
+}

@@ -268,7 +268,7 @@ Home page of managing Rick Rolls. Requires the client to be logged in and have a
 
 #### `/sign-in/`
 
-A page where clients can sign in and get a session id for managing things. (planned:) Accepts url parameter `return_url`, which is where clients are sent to after a successful sign in.
+A page where clients can sign in and get a session id for managing things. Accepts url parameter `return_url`, which is where clients are sent to after a successful sign in.
 
 ## Data storage
 

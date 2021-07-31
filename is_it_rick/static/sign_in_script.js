@@ -26,6 +26,10 @@ async function signIn() {
             
             outputParagraph.innerText = `Successfully signed in.` +
                 `Your session id is ${json.session_id}.`;
+            
+            var params = (new URL(document.location)).searchParams;
+            var return_url = params.get('return_url');
+            window.location.href = decodeURIComponent(return_url);
         }
         else {
             showResponseStatusCode(json, outputParagraph, warningParagraph);

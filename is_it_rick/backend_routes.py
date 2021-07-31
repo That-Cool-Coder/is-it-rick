@@ -91,7 +91,7 @@ def api_register_rick_roll():
         raise_if_debug(e)
         return create_response(Status.ERROR, StatusCode.UNKNOWN_ERROR)
 
-@blueprint.route('/api/sign_in', methods=['POST'])
+@blueprint.route('/api/sign_in/', methods=['POST'])
 def sign_in():
     '''Obtain a session ID for later use'''
     global session_ids
