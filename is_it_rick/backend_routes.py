@@ -79,7 +79,7 @@ def api_register_rick_roll():
             return create_response(Status.WARNING, StatusCode.URL_ALREADY_REGISTERED)
 
         new_rick_roll = RickRoll(url_str=request.json['url'], verified=False,
-            description=request.json.get('descrpition', ''))
+            description=request.json.get('description', ''))
         rick_rolls.append(new_rick_roll)
         save_database(config.RICK_ROLL_DATABASE_FILE, rick_rolls)
         return create_response() # Create empty nominal response
