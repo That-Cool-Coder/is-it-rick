@@ -8,8 +8,11 @@ rick_rolls = [
 ]
 
 users = [
-    User('Test User', 'fake hash', admin=True)
+    User('Test User', 'fake hash', is_admin=True)
 ]
+
+session_ids = []
 
 save_database(config.RICK_ROLL_DATABASE_FILE, rick_rolls)
 save_database(config.USER_DATABASE_FILE, users)
+save_database(config.SESSION_ID_DATABASE_FILE, session_ids)

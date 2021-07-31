@@ -19,3 +19,4 @@ APP_SLOGAN = 'Fast, free Rick Roll detector'
 APP_DESCRIPTION = 'Check if a URL leads to a Rick Roll.'
 
 DATABASE_READ_INTERVAL = 10
+SESSION_ID_DURATION = 60 * 60 # 1 hour (in seconds)

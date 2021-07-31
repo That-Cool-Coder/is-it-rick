@@ -24,15 +24,8 @@ async function signIn() {
         if (json.status == Status.OK) {
             showOnlyOutputElement(outputParagraph, warningParagraph);
             
-            if (json.verified && json.is_rick_roll) {
-                outputParagraph.innerText = verifiedRickRollText;
-            }
-            else if (! json.verified && json.is_rick_roll) {
-                outputParagraph.innerText = unverifiedRickRollText;
-            } 
-            else {
-                outputParagraph.innerText = noRickRollText;
-            }
+            outputParagraph.innerText = `Successfully signed in.` +
+                `Your session id is ${json.session_id}.`;
         }
         else {
             showResponseStatusCode(json, outputParagraph, warningParagraph);

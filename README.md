@@ -8,10 +8,11 @@ Rick Roll detector website written in Python with Flask.
 - [Coding conventions](#coding-conventions)
 - [Documentation conventions](#documentation-conventions)
 - [Git conventions](#git-conventions)
-- [Planned features for initial release](#planned-features-for-initial-release)
+- [Features](#features)
 - [Program architecture and organisation](#program-architecture-and-organisation)
 - [Implementation information](#implementation-information)
 - [Running the development server](#running-the-development-server)
+- [Command-line tools](#command-line-tools)
 - [Local config](#local-config)
 - [Server/client communication protocols](#serverclient-communication-protocols)
 - [API](#api)
@@ -109,20 +110,20 @@ These are essentially the different actions
 - People can quickly check whether a URL leads to a verified Rick Roll, an unverified Rick Roll or is safe.
 - People can submit a URL as a Rick Roll, and when the URL is checked by another person, it will show as unverified.
 - URLs can not be verified except through manipulation of the database by server administrators.
+- User accounts exist
+- User accounts can be created from a command line utilty
 
 #### Planned
 
-- Admin accounts exist
-- Admin accounts can be created from a command line utilty
 - There is a set of managment pages that admins can access
 - In the management pages, Rick Rolls can be verified
 - In the management pages, fake Rick Rolls can be deleted
 
 ## Program architecture and organisation
 
-#### Framework
+#### Framework/libraries
 
-Both the frontend and the backend are served through Flask. While the frontend doesn't strictly need to use Flask, it makes the code neater and makes future growth easy. `flask-error-templating` is used to automatically create HTTP  error handlers.
+Both the frontend and the backend are served through Flask. While the frontend doesn't strictly need to use Flask, it makes the code neater and makes future growth easy. `flask-error-templating` is used to automatically create HTTP error handlers. `argon2` (pip `argon2-cffi`) is used for password hashing and verification. 
 
 #### Entry point
 
@@ -136,7 +137,7 @@ List of non-meta files (in order of importance):
 - `__main__.py` is a test runner. 
 - `main_app.py` is the main file in there and it doesn't do much except handle app creation and import other things.
 - `config.py` holds global constants that won't change between environments. It also handles setting the defaults of `local_config.py`.
-- `local_config.py` holds environment-specific configuration. It is gitignored. For more info see [Local config]($local-config).
+- `local_config.py` holds environment-specific configuration. It is gitignored. For more info see [Local config](#local-config).
 - `common.py` holds things needed by the whole project, including data-loading and enums.
 - `errors.py` holds all of the custom exceptions for this app.
 - `frontend_routes.py` defines all of the Flask routes for pages on the frontend.
@@ -150,21 +151,33 @@ The `static` and `templates` folders also are located in this directory, which i
 
 This section of the documentation is a place to list miscellanious information about how the program is implemented.
 
-#### Data
+#### Data synchronising
 
-The optimal solution to data loading and saving would be to have the data primarily stored in variables, loading from a file at startup and saving to the file at exit. However, Apache2 has a tendency to run multiple instances of the Flask app, which means that the different instances would have different data stored, and when it came to program shutdown, they would all overwrite each other's data in the data file and make a mess.
+The optimal solution to data loading and saving would be to have the data primarily stored in variables, loading from a file at startup and saving to the file at exit. However, for optimal performance it might be required to run multiple instances of the program, which means that the different instances would have different data stored, and when it came to program shutdown, they would all overwrite each other's data in the data file and make a mess.
 
-To partially avoid this, each instance stores the data in variables, and every *n* seconds reads it from file. When new data is added (or when data is to be modified), the existing data read from the file, the new data is added (or modifications performed) and then the updated data is written back to the file.
+To avoid this issue, each instance stores the data in variables, and every *n* seconds reads it from file. When new data is added (or when data is to be modified), the existing data read from the file, the new data is added (or modifications performed) and then the updated data is written back to the file.
 
-#### Usage of URLs
+#### Base URLs
 
-I tried to use Flask `url_for` to allow easy shifting of the app, but that was too difficult to get working. Instead `BASE_URL` is defined in `config.py`, and it is passed to all templates when rendered. Then URLs in the template can be written as so: `{{ base_url + 'static/script.js'}}`.
+I tried to use Flask `url_for` to allow easy shifting of the app, but that was too difficult to get working. Instead `BASE_URL` is defined in the [local config](#local-config), and it is passed to all templates when rendered. Then URLs in the template can be written as so: `{{ base_url + 'static/script.js'}}`.
 
 ## Running the development server
 
 To run the app using Flask's inbuilt Werkzeug server, run `python3 -m is_it_rick` from the root directory of this project.
 
-If you get an error such as `No module named is_it_rick/`, make sure you're using `-m` and make sure that there is no trailing slash on the module name.
+If you get an error similar to `No module named is_it_rick/`, make sure you're in the correct directory, make sure that you're using `-m` and make sure that there is no trailing slash on the module name.
+
+## Command-line tools
+
+There are a number of command-line tools for doing operations that have either not been implemented into the frontend yet or are not supposed to be implemented into the frontend.
+
+#### init_data_files.py
+
+Clear the data files if they exist and initiate them to the default values. This will DELETE ALL DATA so make sure actually intend to use it. (todo: add a confirm option before it deletes everthing)
+
+#### create_user.py
+
+Create a new admin user and add it to the database.
 
 ## Local configuration
 
@@ -186,7 +199,6 @@ These are the values settable in `local_config.py`. Note that they must ALL be s
 These are the values settable in `localConfig.js`. Note that they must ALL be set or they will ALL be set to default values.
 - `production` (boolean) - whether this is a production or development environment. Defaults to `true`.
 - `baseUrl` (string) - the base URL that the WSGI is routed through, as set in your site's config. Defaults to `/`.
-
 
 ## Server/client communication protocols
 
@@ -218,10 +230,10 @@ Accepts:
 
 Returns:
 - `is_rick_roll` (bool) - whether the URL is a Rick Roll.
-- `verified` (bool) - whether the Rick Roll has been verified or not. Only sent if `is_rick_roll` is true
+- `verified` (bool) - whether the Rick Roll has been verified or not. Only sent if `is_rick_roll` is true.
 - `status` and `status_code`.
 
-#### `/api/register_rick_roll`
+#### `/api/register_rick_roll/`
 
 Accepts:
 - `url` (string) - the URL that leads to the Rick Roll.
@@ -229,14 +241,14 @@ Accepts:
 Returns:
 - `status` and `status_code`.
 
-#### `/api/sign_in` (planned)
+#### `/api/sign_in/`
 
 Accepts:
-- `username` (string) - the username of the account to sign in to
-- `password` (string) - the password of the account to sign in to
+- `username` (string) - the username of the account to sign in to.
+- `password` (string) - the password of the account to sign in to.
 
 Returns:
-- `session_id` (string) - session id for the user to use to perform future actions
+- `session_id` (string) - session id for the user to use to perform future actions.
 - `status` and `status_code`.
 
 ## Frontend views
@@ -253,9 +265,9 @@ A page where users can submit Rick Rolls to the database.
 
 Home page of managing Rick Rolls. Requires the client to be logged in and have a session id in their cookies.
 
-#### `/login/` (planned)
+#### `/sign-in/`
 
-A page where clients can login and get a session id for managing things. Accepts url parameter `return_url`, which is where clients are sent to after a successful login.
+A page where clients can sign in and get a session id for managing things. (planned:) Accepts url parameter `return_url`, which is where clients are sent to after a successful sign in.
 
 ## Data storage
 
@@ -299,7 +311,7 @@ Attributes:
 - `name` (string) - a unique reference to the user.
 - `password_hash` (string) - the hash of the user's password.
 - `join_timestamp` (float) - time in seconds since the epoch when this user was created.
-- `admin` (boolean) - whether or not this user has admin permissions.
+- `id_admin` (boolean) - whether or not this user has admin permissions.
 
 ###### `SessionId`
 

@@ -65,16 +65,16 @@ class RickRoll:
 
 class User:
     '''A class storing a user of the application.
-    Currently only admin users have any abilities
+    Currently only admin users have any abilities.
     '''
     def __init__(self, name: str, password_hash: str,
-        join_timestamp: int = None, admin: bool = False):
+        join_timestamp: int = None, is_admin: bool = False):
         self.name = name
         self.password_hash = password_hash
         if join_timestamp is None:
             join_timestamp = time.time()
         self.join_timestamp = join_timestamp
-        self.admin = admin
+        self.is_admin = is_admin
 
 class SessionId:
     '''A class storing a session id.
