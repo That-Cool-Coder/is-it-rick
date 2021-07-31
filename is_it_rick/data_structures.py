@@ -43,7 +43,8 @@ class URL:
 
 class RickRoll:
     '''A class storing a Rick Roll'''
-    def __init__(self, url: URL = None, verified=bool, url_str: str = None):
+    def __init__(self, url: URL = None, url_str: str = None, verified=bool,
+        description: str = ''):
         if url is not None:
             self.url = url
         elif url_str is not None:
@@ -51,6 +52,7 @@ class RickRoll:
         else:
             raise errors.NoUrlProvided()
         self.verified = verified
+        self.description = description
     
     def contains(self, rick_roll=None, url: URL = None, url_str: str = None):
         '''Whether rick_roll/URL leads to this RickRoll'''

@@ -237,6 +237,7 @@ Returns:
 
 Accepts:
 - `url` (string) - the URL that leads to the Rick Roll.
+- `description` (string) - a description of the Rick Roll. Optional, defaults to an empty string.
 
 Returns:
 - `status` and `status_code`.
@@ -294,7 +295,7 @@ This structure holds a record of a potential Rick Roll.
 Attributes:
 - `url` (string) - the URL that holds the Rick Roll.
 - `verified` (boolean) - has this Rick Roll been verified by an administrator?
-- `description` (string) (unimplemented) - a user-provided description of this Rick Roll. Should be optional.
+- `description` (string) - a user-provided description of this Rick Roll. Should be optional.
 
 ###### `URL`
 
