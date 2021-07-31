@@ -177,7 +177,7 @@ Clear the data files if they exist and initiate them to the default values. This
 
 #### create_user.py
 
-Create a new admin user and add it to the database.
+Create a new user and add it to the database.
 
 ## Local configuration
 
