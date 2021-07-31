@@ -173,7 +173,7 @@ There are a number of command-line tools for doing operations that have either n
 
 #### init_data_files.py
 
-Clear the data files if they exist and initiate them to the default values. This will DELETE ALL DATA so make sure actually intend to use it. (todo: add a confirm option before it deletes everthing)
+Clear the data files if they exist and initiate them to the default values. This will DELETE ALL DATA so make sure actually intend to use it. It does ask to make sure you actually want to delete the data.
 
 #### create_user.py
 
