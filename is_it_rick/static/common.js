@@ -88,3 +88,13 @@ function goToSignInPage() {
     window.location.href = `${window.location.protocol}//${window.location.host}` +
         `${urls.frontend.signIn}?return_url=${crntPath}`;
 }
+
+function saveSessionId(sessionId) {
+    Cookies.set(config.sessionIdCookie, sessionId, {
+        secure : true,
+        expires : config.sessionIdCookieDuration});
+}
+
+function loadSessionid() {
+    return Cookies.get(config.sessionIdCookie);
+}

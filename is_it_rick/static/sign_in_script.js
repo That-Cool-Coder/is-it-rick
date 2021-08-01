@@ -16,23 +16,21 @@ async function signIn() {
     if (username == '' || password == '') {
         showWarning('You must enter a username and password',
             outputParagraph, warningParagraph);
+        return;
+    }
+    var response = await basicPost(urls.backend.signIn,
+        {username : username, password : password});
+    var json = await response.json();
+    if (json.status == Status.OK) {
+        showOnlyOutputElement(outputParagraph, warningParagraph);
+        
+        saveSessionId(json.session_id);
+        
+        var params = (new URL(document.location)).searchParams;
+        var return_url = params.get('return_url');
+        window.location.href = decodeURIComponent(return_url);
     }
     else {
-        var response = await basicPost(urls.backend.signIn,
-            {username : username, password : password});
-        var json = await response.json();
-        if (json.status == Status.OK) {
-            showOnlyOutputElement(outputParagraph, warningParagraph);
-            
-            outputParagraph.innerText = `Successfully signed in.` +
-                `Your session id is ${json.session_id}.`;
-            
-            var params = (new URL(document.location)).searchParams;
-            var return_url = params.get('return_url');
-            window.location.href = decodeURIComponent(return_url);
-        }
-        else {
-            showResponseStatusCode(json, outputParagraph, warningParagraph);
-        }
+        showResponseStatusCode(json, outputParagraph, warningParagraph);
     }
 }
