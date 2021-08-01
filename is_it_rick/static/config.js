@@ -8,7 +8,7 @@ else {
     };
 }
 
-config.sessionIdCookie = 'isItRickSessionId';
+config.sessionIdCookieName = 'isItRickSessionId';
 
 // Arbitrary large value - session id expiration is handled on server
 config.sessionIdCookieDuration = 1000;

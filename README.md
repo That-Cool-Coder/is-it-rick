@@ -262,7 +262,7 @@ Homepage and main page of the app. Here, users can check if URLs are Rick Rolls.
 
 A page where users can submit Rick Rolls to the database.
 
-#### `/manage/` (planned)
+#### `/manage/` (WIP)
 
 Home page of managing Rick Rolls. Requires the client to be logged in and have a session id in their cookies.
 

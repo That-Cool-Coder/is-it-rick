@@ -1,3 +1,5 @@
+from is_it_rick.common import find_in_iterable
+from is_it_rick.local_config import BASE_URL
 from flask import *
 
 from is_it_rick import config
@@ -19,3 +21,13 @@ def sign_in():
 @blueprint.route('/sign-up/', methods=['GET'])
 def sign_up():
     return render_template('sign_up.html', base_url=config.BASE_URL)
+
+@blueprint.route('/manage/', methods=['GET'])
+def manage():
+    session_id_value = request.cookies.get(config.SESSION_ID_COOKIE_NAME, None)
+
+    is_signed_in = False
+    if session_id_value is not None:
+        existing_session_id = find_in_iterable()
+
+    return render_template('manage.html', base_url=BASE_URL, signed_in=is_signed_in)

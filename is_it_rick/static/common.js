@@ -90,11 +90,11 @@ function goToSignInPage() {
 }
 
 function saveSessionId(sessionId) {
-    Cookies.set(config.sessionIdCookie, sessionId, {
+    Cookies.set(config.sessionIdCookieName, sessionId, {
         secure : true,
         expires : config.sessionIdCookieDuration});
 }
 
 function loadSessionid() {
-    return Cookies.get(config.sessionIdCookie);
+    return Cookies.get(config.sessionIdCookieName);
 }

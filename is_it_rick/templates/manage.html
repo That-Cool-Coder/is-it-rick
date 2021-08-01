@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+{% block title %}Sign In{% endblock %}
+
+{% block content %}
+<h2>Manage Rick Rolls</h2>
+{% if signed_in %}
+    <p>todo: make something appear here</p>
+{% else %}
+    <p>You must be <a href="javascript:goToSignInPage()">signed in</a> to manage Rick Rolls</p>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+{{ 'todo: write this code' }}
+{% endblock %}
