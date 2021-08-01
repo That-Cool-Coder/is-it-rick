@@ -15,3 +15,7 @@ def register_rick_roll():
 @blueprint.route('/sign-in/', methods=['GET'])
 def sign_in():
     return render_template('sign_in.html', base_url=config.BASE_URL)
+
+@blueprint.route('/sign-up/', methods=['GET'])
+def sign_up():
+    return render_template('sign_up.html', base_url=config.BASE_URL)
