@@ -143,7 +143,7 @@ List of non-meta files (in order of importance):
 - `frontend_routes.py` defines all of the Flask routes for pages on the frontend.
 - `backend_routes.py` defines all of the Flask routes for API endpoints on the backend.
 - `data_structures.py` holds classes that hold the data.
-- `init_data_files.py` is not actually part of the app run by Apache2, but initialises the data files for deployment.
+- `database.py` handles data loading and saving.
 
 The `static` and `templates` folders also are located in this directory, which is the Flask default location.
 

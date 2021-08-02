@@ -1,7 +1,6 @@
 import argon2
 
-from is_it_rick import config
-from is_it_rick.data_loading import *
+from is_it_rick import config, database
 from is_it_rick.common import *
 from is_it_rick.data_structures import User
 
@@ -13,7 +12,7 @@ user_name = input('Enter username: ')
 
 # Check for duplicate username immediately to avoid making
 # people enter extra details if the program is going to quit
-users = load_database(config.USER_DATABASE_FILE)
+users = database.load(config.USER_DATABASE_FILE)
 existing_user = find_in_iterable(users, lambda x: x.name == user_name)
 if existing_user is not None:
     print('A user already exists with that username')
@@ -27,6 +26,6 @@ user_password_hash = argon2.PasswordHasher().hash(user_password)
 user = User(user_name, user_password_hash, is_admin=user_is_admin)
 
 users.append(user)
-save_database(config.USER_DATABASE_FILE, users)
+database.save(config.USER_DATABASE_FILE, users)
 
 print('Successfully created user')

@@ -5,6 +5,7 @@ from is_it_rick import config
 
 from is_it_rick import frontend_routes
 from is_it_rick import backend_routes
+from is_it_rick import database
 
 app = Flask(__name__)
 
@@ -12,7 +13,7 @@ app.register_blueprint(frontend_routes.blueprint)
 app.register_blueprint(backend_routes.blueprint)
 
 def start_background_tasks():
-    backend_routes.start_background_tasks()
+    database.start_database_read_loop()
 
 create_http_error_handlers(app, [
     ErrorPage(400, 'Bad request'),

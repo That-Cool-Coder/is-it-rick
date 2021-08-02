@@ -90,3 +90,6 @@ class SessionId:
         self.value = value
         self.user_name = user_name
         self.expiry_time = expiry_time
+    
+    def has_expired(self):
+        return time.time() > self.expiry_time

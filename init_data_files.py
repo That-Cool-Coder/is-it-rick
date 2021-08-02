@@ -1,5 +1,4 @@
-from is_it_rick import config
-from is_it_rick.data_loading import load_database, save_database
+from is_it_rick import config, database
 from is_it_rick.data_structures import *
 
 want_to_continue = input('Are you sure you want to do initiate (clear) the data files?\n' + 
@@ -16,8 +15,8 @@ rick_rolls = [
 users = []
 session_ids = []
 
-save_database(config.RICK_ROLL_DATABASE_FILE, rick_rolls)
-save_database(config.USER_DATABASE_FILE, users)
-save_database(config.SESSION_ID_DATABASE_FILE, session_ids)
+database.save(config.RICK_ROLL_DATABASE_FILE, rick_rolls)
+database.save(config.USER_DATABASE_FILE, users)
+database.save(config.SESSION_ID_DATABASE_FILE, session_ids)
 
 print('Successfully initiated all databases')

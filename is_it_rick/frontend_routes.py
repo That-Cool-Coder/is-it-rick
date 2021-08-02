@@ -1,7 +1,8 @@
-from is_it_rick.common import find_in_iterable
-from is_it_rick.local_config import BASE_URL
 from flask import *
 
+from is_it_rick import database
+from is_it_rick.common import find_in_iterable
+from is_it_rick.local_config import BASE_URL
 from is_it_rick import config
 
 blueprint = Blueprint('frontend', __name__)
@@ -28,6 +29,10 @@ def manage():
 
     is_signed_in = False
     if session_id_value is not None:
-        existing_session_id = find_in_iterable()
+        existing_session_id = find_in_iterable(database.session_ids,
+            lambda x: x.value == session_id_value)
+        if existing_session_id is not None and \
+            not existing_session_id.has_expired():
+            is_signed_in = True
 
     return render_template('manage.html', base_url=BASE_URL, signed_in=is_signed_in)
