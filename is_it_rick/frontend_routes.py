@@ -35,4 +35,5 @@ def manage():
             not existing_session_id.has_expired():
             is_signed_in = True
 
-    return render_template('manage.html', base_url=BASE_URL, signed_in=is_signed_in)
+    return render_template('manage.html', base_url=BASE_URL,
+        signed_in=is_signed_in, rick_rolls=database.rick_rolls)

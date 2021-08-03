@@ -58,12 +58,16 @@ button {
     vertical-align: center;
 }
 
+#navigationButtons {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
 .navigationButton {
     text-decoration: none;
     display: inline-block;
     border: 1px solid white;
     padding: 3px;
-    margin-top: 10px;
     color: var(--primary);
     background-color: #f6f6f6;
 }

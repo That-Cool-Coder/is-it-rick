@@ -17,19 +17,19 @@
                         <h2 id="slogan">Fast, free Rick Roll detector</h2>
                     </td>
                 </tr>
-                <tr>
-                    <td id="navigationButtons">
-                        <a class="navigationButton"
-                            href="{{ base_url }}">Homepage</a>
-                        <a class="navigationButton"
-                            href="{{ base_url + 'register-rick-roll/' }}">Register rick roll</a>
-                        <a class="navigationButton"
-                            href="javascript: goToSignInPage()">Sign in</a>
-                        <a class="navigationButton"
-                            href="{{ base_url + 'sign-up' }}">Sign up</a>
-                    </td>
-                </tr>
             </table>
+            <div id="navigationButtons">
+                <a class="navigationButton"
+                    href="{{ base_url }}">Homepage</a>
+                <a class="navigationButton"
+                    href="{{ base_url + 'register-rick-roll/' }}">Register rick roll</a>
+                <a class="navigationButton"
+                    href="{{ base_url + 'manage/' }}">Manage</a>
+                <a class="navigationButton"
+                    href="javascript: goToSignInPage()">Sign in</a>
+                <a class="navigationButton"
+                    href="{{ base_url + 'sign-up' }}">Sign up</a>
+            </div>
         </div>
 
         <div id="mainDiv">{% block content %} {% endblock %}</div>
