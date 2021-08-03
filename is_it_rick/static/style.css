@@ -83,3 +83,9 @@ button {
     background-color: white;
     padding: 10px;
 }
+
+.rickRollDiv {
+    cursor: pointer;
+    padding: 5px;
+    border: 1px solid #dddddd;
+}
