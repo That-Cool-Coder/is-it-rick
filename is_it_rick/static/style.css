@@ -43,6 +43,7 @@ button {
 #topBar {
     background-color: var(--primary);
     display: block;
+    max-height: 25vh;
 }
 
 #title, #slogan {
@@ -58,15 +59,15 @@ button {
     vertical-align: center;
 }
 
-#navigationButtons {
-    margin-top: 10px;
-    margin-bottom: 5px;
+#navigationBar {
+    padding: 10px 20px 5px 20px;
 }
 
-.navigationButton {
+#navigationBar a {
     text-decoration: none;
     display: inline-block;
     border: 1px solid white;
+    margin: 0px 1px 0px 2px;
     padding: 3px;
     color: var(--primary);
     background-color: #f6f6f6;
@@ -74,14 +75,10 @@ button {
 
 #mainDiv {
     width: 80vw;
-    height: 60vh;
+    height: 70vh;
 
-    /* center div */
-    /* needs work - div easily goes too high on smallish screens */
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    margin: auto;
+    margin-top: 10px;
 
     background-color: white;
     padding: 10px;
