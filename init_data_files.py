@@ -9,8 +9,8 @@ if want_to_continue != 'yes':
     quit()
 
 rick_rolls = [
-    RickRoll(url_str='https://storage.calbabreaker.repl.co/secret.mp4'),
-    RickRoll(url_str='https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+    RickRoll(0, url_str='https://storage.calbabreaker.repl.co/secret.mp4'),
+    RickRoll(1, url_str='https://www.youtube.com/watch?v=dQw4w9WgXcQ')
 ]
 users = []
 session_ids = []

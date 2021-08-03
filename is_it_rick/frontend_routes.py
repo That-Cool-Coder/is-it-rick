@@ -37,3 +37,12 @@ def manage():
 
     return render_template('manage.html', base_url=BASE_URL,
         signed_in=is_signed_in, rick_rolls=database.rick_rolls)
+
+@blueprint.route('/view-rick-roll/<rick_roll_id>/', methods=['GET'])
+def view_rick_roll(rick_roll_id):
+    rick_roll = find_in_iterable(database.rick_rolls, lambda x: str(x.id) == rick_roll_id)
+    if rick_roll is None:
+        abort(404)
+    
+    return render_template('view_rick_roll.html', base_url=config.BASE_URL,
+        rick_roll = rick_roll)

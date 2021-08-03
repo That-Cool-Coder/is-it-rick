@@ -60,11 +60,13 @@ def api_register_rick_roll():
             
         if found_rick_roll is not None:
             return create_response(Status.WARNING, StatusCode.URL_ALREADY_REGISTERED)
-
-        new_rick_roll = RickRoll(url_str=request.json['url'], verified=False,
-            description=request.json.get('description', ''))
+    
+        highest_id = max(rick_roll.id for rick_roll in database.rick_rolls)
+        new_rick_roll = RickRoll(highest_id + 1, url_str=request.json['url'],
+            verified=False, description=request.json.get('description', ''))
         database.rick_rolls.append(new_rick_roll)
         database.save(config.RICK_ROLL_DATABASE_FILE, database.rick_rolls)
+        
         return create_response() # Create empty nominal response
 
     # This will get thrown by URL object creation if invalid

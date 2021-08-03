@@ -89,6 +89,11 @@ function goToSignInPage() {
         `${urls.frontend.signIn}?return_url=${crntPath}`;
 }
 
+function viewRickRoll(rickRollId) {
+    // Go to the view page and view this rick roll
+    window.location.href = urls.frontend.viewRickRoll + rickRollId;
+}
+
 function saveSessionId(sessionId) {
     Cookies.set(config.sessionIdCookieName, sessionId, {
         secure : true,

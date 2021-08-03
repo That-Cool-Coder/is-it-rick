@@ -5,7 +5,7 @@ from is_it_rick import errors
 class URL:
     '''A class storing a URL'''
     def __init__(self, url: str):
-        self.url = url
+        self.value = url
 
         # Try and get the attributes to make sure the URL is valid
         try:
@@ -16,7 +16,7 @@ class URL:
     
     def domain_name_and_path(self):
         '''Get domain name and file path of URL. EG: google.com/somevalue/'''
-        domain_name_and_path = self.url.split('://', 1)[1]
+        domain_name_and_path = self.value.split('://', 1)[1]
         if domain_name_and_path.startswith('www.'):
             domain_name_and_path = domain_name_and_path.replace('www.', '', 1)
         return domain_name_and_path
@@ -42,9 +42,12 @@ class URL:
         return domain_name_matches and path_matches
 
 class RickRoll:
-    '''A class storing a Rick Roll'''
-    def __init__(self, url: URL = None, url_str: str = None, verified=bool,
-        description: str = ''):
+    '''A class storing a Rick Roll
+    
+    @_id has an underscore because "id" is a python inbuilt'''
+    def __init__(self, _id: int, url: URL = None, url_str: str = None, verified=bool,
+        description: str = '', submit_timestamp: float = None):
+        self.id = _id
         if url is not None:
             self.url = url
         elif url_str is not None:
@@ -53,6 +56,9 @@ class RickRoll:
             raise errors.NoUrlProvided()
         self.verified = verified
         self.description = description
+        if submit_timestamp is None:
+            submit_timestamp = time.time()
+        self.submit_timestamp = submit_timestamp
     
     def contains(self, rick_roll=None, url: URL = None, url_str: str = None):
         '''Whether rick_roll/URL leads to this RickRoll'''

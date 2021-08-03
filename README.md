@@ -262,13 +262,21 @@ Homepage and main page of the app. Here, users can check if URLs are Rick Rolls.
 
 A page where users can submit Rick Rolls to the database.
 
-#### `/manage/` (WIP)
-
-Home page of managing Rick Rolls. Requires the client to be logged in and have a session id in their cookies.
-
 #### `/sign-in/`
 
 A page where clients can sign in and get a session id for managing things. Accepts url parameter `return_url`, which is where clients are sent to after a successful sign in.
+
+#### `/sign-up`
+
+Currently just a page saying that you can't sign up.
+
+#### `/manage/` (WIP)
+
+Home page of managing Rick Rolls. Requires the client to be logged in and have a session id in their cookies, otherwise asks them to login.
+
+#### `/view-rick-roll/<rick_roll_id>/` (planned)
+
+View info on a specific rick roll identified by `rick_roll_id`.
 
 ## Data storage
 
@@ -293,8 +301,10 @@ This is a list of all of the data files used in this program.
 This structure holds a record of a potential Rick Roll.
 
 Attributes:
+- `id` (integer) - unique id that represents this Rick Roll. In sequential order.
 - `url` (string) - the URL that holds the Rick Roll.
 - `verified` (boolean) - has this Rick Roll been verified by an administrator?
+- `submit_timestamp` (float) - when this Rick Roll was submitted to the program. In seconds since the epoch.
 - `description` (string) - a user-provided description of this Rick Roll. Should be optional.
 
 ###### `URL`
@@ -302,7 +312,7 @@ Attributes:
 This structure holds a URL and some functions that get info from it. It's mainly to make comparing URLs and checking equivalence easier.
 
 Attriubutes:
-- `url` (string) - the actual URL that this object points to.
+- `value` (string) - the actual URL that this object points to.
 
 ###### `User`
 

@@ -1,5 +1,5 @@
 {% extends 'layout.html' %}
-{% block title %}Sign In{% endblock %}
+{% block title %}Manage{% endblock %}
 
 {% block content %}
 <h2>Manage Rick Rolls</h2>
@@ -7,7 +7,7 @@
     <p>Recently submitted Rick Rolls:</p>
     {% for rick_roll in rick_rolls %}
         {% if not rick_roll.verified %}
-            <p>hi I am a rick roll and that's how we like it</p>
+            <p>{{ rick_roll.url.value }}</p>
         {% endif %}
     {% endfor %}
 {% else %}
