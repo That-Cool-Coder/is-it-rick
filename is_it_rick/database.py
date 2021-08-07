@@ -43,14 +43,18 @@ def database_read_loop():
         time.sleep(config.DATABASE_READ_INTERVAL)
 
 def check_if_signed_in(session_id_value: str):
-    if session_id_value is None:
-        return False
+    '''Check if session_id_value is valid.
 
+    Returns a boolean stating the validity and the session id
+    that the value belongs to (None if the session id is invalid).
+    '''
+    if session_id_value is None:
+        return False, None
+
+    existing_session_id = find_in_iterable(session_ids,
+        lambda x: x.value == session_id_value)
     is_signed_in = False
-    if session_id_value is not None:
-        existing_session_id = find_in_iterable(session_ids,
-            lambda x: x.value == session_id_value)
-        if existing_session_id is not None and \
-            not existing_session_id.has_expired():
-            is_signed_in = True
-    return is_signed_in
+    if existing_session_id is not None and \
+        not existing_session_id.has_expired():
+        is_signed_in = True
+    return is_signed_in, existing_session_id

@@ -3,7 +3,7 @@
 
 {% block content %}
 <h2>Manage Rick Rolls</h2>
-{% if signed_in %}
+{% if signed_in and user.is_admin %}
     <p>Recently submitted Rick Rolls:</p>
     {% for rick_roll in rick_rolls %}
         {% if not rick_roll.verified %}
@@ -16,7 +16,8 @@
         {% endif %}
     {% endfor %}
 {% else %}
-    <p>You must be <a href="javascript:goToSignInPage()">signed in</a> to manage Rick Rolls</p>
+    <p>You must be <a href="javascript:goToSignInPage()">signed in</a>
+    as an admin user to manage Rick Rolls</p>
 {% endif %}
 {% endblock %}
 

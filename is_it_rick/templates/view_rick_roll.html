@@ -5,17 +5,35 @@
 <h2>Rick Roll info:</h2>
 <p>URL: <a href="{{ rick_roll.url.value }}">{{ rick_roll.url.value }}</a></p>
 <p>Submitted at: <span class="timestamp">{{ rick_roll.submit_timestamp }}</span></p>
+
 {% if rick_roll.verified %}
     <p>Verified: True</p>
 {% else %}
     <p>Verified: False</p>
 {% endif %}
-<p>Description: {{ rick_roll.description }}</p>
 
-{% if signed_in %}
-    <p>you are in</p>
+{% if rick_roll.description == '' %}
+    <p>No description</p>
+{% else %}
+    <p>Description: {{ rick_roll.description }}</p>
+{% endif %}
+
+{% if signed_in and user.is_admin %}
+    <br>
+    <p>Admin actions:</p>
+    <button onclick="deleteRickRoll()">Delete</button>
+    {% if not rick_roll.verified %}
+        <button onclick="verifyRickRoll()">Verify</button>
+    {% endif %}
+    <p id="outputParagraph" hidden></p>
+    <p id="warningParagraph" hidden></p>
 {% endif %}
 {% endblock %}
 
 {% block scripts %}
+<script>
+    // Pass Rick Roll info to JS
+    const rickRollId = {{ rick_roll.id }};
+</script>
+<script src="{{ base_url + 'static/view_rick_roll_script.js' }}"></script>
 {% endblock %}

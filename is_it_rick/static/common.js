@@ -12,6 +12,9 @@ const StatusCode = {
     INVALID_REQUEST : 'INVALID_REQUEST',
     URL_ALREADY_REGISTERED : 'URL_ALREADY_REGISTERED',
     INVALID_CREDENTITALS : 'INVALID_CREDENTIALS',
+    NOT_SIGNED_IN : 'NOT_SIGNED_IN',
+    RICK_ROLL_NOT_FOUND : 'RICK_ROLL_NOT_FOUND',
+    USER_NOT_ADMIN : 'USER_NOT_ADMIN',
 
     // StatusCodes that go with Status ERROR
     UNKNOWN_ERROR : 'UNKNOWN_ERROR'
@@ -23,6 +26,9 @@ const StatusCodeMessages = {
     [StatusCode.INVALID_REQUEST] : 'We are having difficulty communicating with the server',
     [StatusCode.URL_ALREADY_REGISTERED] : 'That URL is already registered',
     [StatusCode.INVALID_CREDENTITALS] : 'The username or password that you entered is incorrect',
+    [StatusCode.NOT_SIGNED_IN] : 'You are not signed in',
+    [StatusCode.RICK_ROLL_NOT_FOUND] : 'The Rick Roll was not found',
+    [StatusCode.USER_NOT_ADMIN] : 'You need to be an administrator to do that',
 
     // Messages that go with Status ERROR
     [StatusCode.UNKNOWN_ERROR] : 'Unknown server error'

@@ -10,6 +10,8 @@ const urls = {
     backend : {
         isItRick : config.baseUrl + 'api/is_it_rick/',
         registerRickRoll : config.baseUrl + 'api/register_rick_roll/',
-        signIn : config.baseUrl + 'api/sign_in/'
+        signIn : config.baseUrl + 'api/sign_in/',
+        deleteRickRoll : config.baseUrl + 'api/delete_rick_roll/',
+        verifyRickRoll : config.baseUrl + 'api/verify_rick_roll/'
     }
 }

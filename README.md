@@ -259,6 +259,24 @@ Returns:
 - `session_id` (string) - session id for the user to use to perform future actions.
 - `status` and `status_code`.
 
+#### `/api/delete_rick_roll/`
+
+Accepts:
+- `id` (integer) - the id of the Rick Roll to delete
+- `session_id` (string, from cookies) - a session_id of an admin user
+
+Returns:
+- `status` and `status_code`
+
+#### `/api/verify_rick_roll/`
+
+Accepts:
+- `id` (integer) - the id of the Rick Roll to verify
+- `session_id` (string, from cookies) - a session_id of an admin user
+
+Returns:
+- `status` and `status_code`
+
 ## Frontend views
 
 #### `/`
@@ -277,13 +295,13 @@ A page where clients can sign in and get a session id for managing things. Accep
 
 Currently just a page saying that you can't sign up.
 
-#### `/manage/` (WIP)
+#### `/manage/`
 
-Home page of managing Rick Rolls. Requires the client to be logged in and have a session id in their cookies, otherwise asks them to login.
+Home page of managing Rick Rolls. Requires the client to be logged in as an admin user and have a session id in their cookies, otherwise asks them to login.
 
-#### `/view-rick-roll/<rick_roll_id>/` (planned)
+#### `/view-rick-roll/<rick_roll_id>/`
 
-View info on a specific rick roll identified by `rick_roll_id`.
+View info on a specific rick roll identified by `rick_roll_id`. Admin users can also verify or delete the rick roll on this page.
 
 ## Data storage
 

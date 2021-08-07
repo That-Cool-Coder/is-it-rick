@@ -106,3 +106,65 @@ def sign_in():
     except BaseException as e:
         raise_if_debug(e)
         return create_response(Status.ERROR, StatusCode.UNKNOWN_ERROR)
+
+@blueprint.route('/api/delete_rick_roll/', methods=['POST'])
+def delete_rick_roll():
+    if not request_fields_valid(['id'], request.json):
+        return create_response(Status.WARNING, StatusCode.INVALID_REQUEST)
+    
+    try:
+        session_id_value = request.cookies.get(config.SESSION_ID_COOKIE_NAME, None)
+        is_signed_in, session_id = database.check_if_signed_in(session_id_value)
+        user = find_in_iterable(database.users,
+            lambda x: x.name == session_id.user_name)
+        if not is_signed_in:
+            return create_response(Status.WARNING, StatusCode.NOT_SIGNED_IN)
+        elif not user.is_admin:
+            return create_response(Status.WARNING, StatusCode.USER_NOT_ADMIN)
+        
+        # Load the rick rolls straight from file to clear cache
+        database.rick_rolls = database.load(config.RICK_ROLL_DATABASE_FILE)
+
+        rick_roll = find_in_iterable(database.rick_rolls,
+            lambda x: x.id == request.json['id'])
+        if rick_roll is None:
+            return create_response(Status.WARNING, StatusCode.RICK_ROLL_NOT_FOUND)
+        database.rick_rolls.remove(rick_roll)
+        database.save(config.RICK_ROLL_DATABASE_FILE, database.rick_rolls)
+
+        return create_response()
+
+    except BaseException as e:
+        raise_if_debug(e)
+        return create_response(Status.ERROR, StatusCode.UNKNOWN_ERROR)
+
+@blueprint.route('/api/verify_rick_roll/', methods=['POST'])
+def verify_rick_roll():
+    if not request_fields_valid(['id'], request.json):
+        return create_response(Status.WARNING, StatusCode.INVALID_REQUEST)
+    
+    try:
+        session_id_value = request.cookies.get(config.SESSION_ID_COOKIE_NAME, None)
+        is_signed_in, session_id = database.check_if_signed_in(session_id_value)
+        user = find_in_iterable(database.users,
+            lambda x: x.name == session_id.user_name)
+        if not is_signed_in:
+            return create_response(Status.WARNING, StatusCode.NOT_SIGNED_IN)
+        elif not user.is_admin:
+            return create_response(Status.WARNING, StatusCode.USER_NOT_ADMIN)
+        
+        # Load the rick rolls straight from file to clear cache
+        database.rick_rolls = database.load(config.RICK_ROLL_DATABASE_FILE)
+
+        rick_roll = find_in_iterable(database.rick_rolls,
+            lambda x: x.id == request.json['id'])
+        if rick_roll is None:
+            return create_response(Status.WARNING, StatusCode.RICK_ROLL_NOT_FOUND)
+        rick_roll.verified = True
+        database.save(config.RICK_ROLL_DATABASE_FILE, database.rick_rolls)
+
+        return create_response()
+
+    except BaseException as e:
+        raise_if_debug(e)
+        return create_response(Status.ERROR, StatusCode.UNKNOWN_ERROR)

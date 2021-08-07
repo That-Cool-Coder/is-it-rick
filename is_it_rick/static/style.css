@@ -103,3 +103,7 @@ button {
 .timestamp {
     visibility: hidden;
 }
+
+.greyedOut {
+    color: #aaaaaa;
+}
