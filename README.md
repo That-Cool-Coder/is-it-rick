@@ -161,6 +161,13 @@ To avoid this issue, each instance stores the data in variables, and every *n* s
 
 I tried to use Flask `url_for` to allow easy shifting of the app, but that was too difficult to get working. Instead `BASE_URL` is defined in the [local config](#local-config), and it is passed to all templates when rendered. Then URLs in the template can be written as so: `{{ base_url + 'static/script.js'}}`.
 
+#### Converting timestamps to dates in the frontend
+
+As with many other programs, times are stored in seconds past the epoch (1st Jan 1970). However, these need to be converted into local time in a humam-readable format when they are displayed on the frontend. To achieve this, there is a CSS class called `timestamp` which you can apply to a span containing the timestamp. There is a function `formatTimestamps` in `common.js` that is run after the HTML is rendered and it converts all of the `timestamp` elements. Elements of class `timestamp` are hidden until formatted by the JavaScript.
+
+Example usage:
+```<p> The data was submitted at <span class="timestamp">234567898.32</span></p> ```
+
 ## Running the development server
 
 To run the app using Flask's inbuilt Werkzeug server, run `python3 -m is_it_rick` from the root directory of this project.

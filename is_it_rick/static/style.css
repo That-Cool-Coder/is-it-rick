@@ -1,3 +1,5 @@
+/* Global stuff */
+
 :root {
     --primary: #ce2b16;
     --secondary: #f6f6f6
@@ -40,6 +42,8 @@ button {
     color: red;
 }
 
+/* Top bar */
+
 #topBar {
     background-color: var(--primary);
     display: block;
@@ -73,6 +77,8 @@ button {
     background-color: #f6f6f6;
 }
 
+/* Main page content */
+
 #mainDiv {
     width: 80vw;
     height: 70vh;
@@ -88,4 +94,8 @@ button {
     cursor: pointer;
     padding: 5px;
     border: 1px solid #dddddd;
+}
+
+.timestamp {
+    visibility: hidden;
 }

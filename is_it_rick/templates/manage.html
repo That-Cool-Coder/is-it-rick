@@ -10,7 +10,8 @@
             <div class="rickRollDiv" onclick="viewRickRoll({{ rick_roll.id }})">
                 <a href="javascript:viewRickRoll({{ rick_roll.id }})">
                     {{ rick_roll.url.value }}</a>
-                <label style="float: right">Submitted at {{ rick_roll.submit_timestamp }}</label>
+                <label style="float: right">Submitted at
+                    <span class="timestamp">{{ rick_roll.submit_timestamp }}</span></label>
             </div>
         {% endif %}
     {% endfor %}

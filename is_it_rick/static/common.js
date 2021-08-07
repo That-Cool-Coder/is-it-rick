@@ -28,6 +28,8 @@ const StatusCodeMessages = {
     [StatusCode.UNKNOWN_ERROR] : 'Unknown server error'
 }
 
+const timestampClassName = 'timestamp';
+
 function basicPost(url, data) {
     return fetch(url, {
         method: 'POST',
@@ -103,3 +105,14 @@ function saveSessionId(sessionId) {
 function loadSessionid() {
     return Cookies.get(config.sessionIdCookieName);
 }
+
+function formatTimestamps() {
+    var timestamps = [...document.getElementsByClassName(timestampClassName)];
+    timestamps.forEach(timestamp => {
+        var date = new Date(Number(timestamp.innerText) * 1000);
+        timestamp.innerText = date.toLocaleString();
+        timestamp.style.visibility = 'visible';
+    })
+}
+
+formatTimestamps();
