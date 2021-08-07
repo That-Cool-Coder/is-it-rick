@@ -109,7 +109,7 @@ function loadSessionid() {
 function formatTimestamps() {
     var timestamps = [...document.getElementsByClassName(timestampClassName)];
     timestamps.forEach(timestamp => {
-        var date = new Date(Number(timestamp.innerText) * 1000);
+        var date = new Date(Number(timestamp.textContent) * 1000);
         timestamp.innerText = date.toLocaleString();
         timestamp.style.visibility = 'visible';
     })
