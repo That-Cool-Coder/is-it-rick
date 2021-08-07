@@ -26,15 +26,7 @@ def sign_up():
 @blueprint.route('/manage/', methods=['GET'])
 def manage():
     session_id_value = request.cookies.get(config.SESSION_ID_COOKIE_NAME, None)
-
-    is_signed_in = False
-    if session_id_value is not None:
-        existing_session_id = find_in_iterable(database.session_ids,
-            lambda x: x.value == session_id_value)
-        if existing_session_id is not None and \
-            not existing_session_id.has_expired():
-            is_signed_in = True
-
+    is_signed_in = database.check_if_signed_in(session_id_value)
     return render_template('manage.html', base_url=BASE_URL,
         signed_in=is_signed_in, rick_rolls=database.rick_rolls)
 
@@ -43,6 +35,9 @@ def view_rick_roll(rick_roll_id):
     rick_roll = find_in_iterable(database.rick_rolls, lambda x: str(x.id) == rick_roll_id)
     if rick_roll is None:
         abort(404)
+
+    session_id_value = request.cookies.get(config.SESSION_ID_COOKIE_NAME, None)
+    is_signed_in = database.check_if_signed_in(session_id_value)
     
     return render_template('view_rick_roll.html', base_url=config.BASE_URL,
-        rick_roll = rick_roll)
+        rick_roll=rick_roll, is_signed_in=is_signed_in)

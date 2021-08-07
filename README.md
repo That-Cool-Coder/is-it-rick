@@ -138,7 +138,7 @@ List of non-meta files (in order of importance):
 - `main_app.py` is the main file in there and it doesn't do much except handle app creation and import other things.
 - `config.py` holds global constants that won't change between environments. It also handles setting the defaults of `local_config.py`.
 - `local_config.py` holds environment-specific configuration. It is gitignored. For more info see [Local config](#local-config).
-- `common.py` holds things needed by the whole project, including data-loading and enums.
+- `common.py` holds things needed by the whole project such as enums and utility functions. It should not have database access.
 - `errors.py` holds all of the custom exceptions for this app.
 - `frontend_routes.py` defines all of the Flask routes for pages on the frontend.
 - `backend_routes.py` defines all of the Flask routes for API endpoints on the backend.

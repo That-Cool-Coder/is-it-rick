@@ -3,14 +3,18 @@
 
 {% block content %}
 <h2>Rick Roll info:</h2>
-<p>URL: {{ rick_roll.url.value }}</p>
-<p>Submitted at: {{ rick_roll.submit_timestamp|int }}</p>
+<p>URL: <a href="{{ rick_roll.url.value }}">{{ rick_roll.url.value }}</a></p>
+<p>Submitted at: <span class="timestamp">{{ rick_roll.submit_timestamp }}</span></p>
 {% if rick_roll.verified %}
-<p>Verified: True</p>
+    <p>Verified: True</p>
 {% else %}
-<p>Verified: False</p>
+    <p>Verified: False</p>
 {% endif %}
 <p>Description: {{ rick_roll.description }}</p>
+
+{% if signed_in %}
+    <p>you are in</p>
+{% endif %}
 {% endblock %}
 
 {% block scripts %}

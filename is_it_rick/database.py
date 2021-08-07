@@ -3,6 +3,7 @@ import time
 import jsonpickle
 
 from is_it_rick import config
+from is_it_rick.common import *
 from is_it_rick.data_structures import *
 
 rick_rolls = []
@@ -40,3 +41,16 @@ def database_read_loop():
         users = load(config.USER_DATABASE_FILE)
         session_ids = load(config.SESSION_ID_DATABASE_FILE)
         time.sleep(config.DATABASE_READ_INTERVAL)
+
+def check_if_signed_in(session_id_value: str):
+    if session_id_value is None:
+        return False
+
+    is_signed_in = False
+    if session_id_value is not None:
+        existing_session_id = find_in_iterable(session_ids,
+            lambda x: x.value == session_id_value)
+        if existing_session_id is not None and \
+            not existing_session_id.has_expired():
+            is_signed_in = True
+    return is_signed_in
