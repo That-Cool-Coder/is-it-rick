@@ -4,17 +4,19 @@
 {% block content %}
 <h2>Manage Rick Rolls</h2>
 {% if signed_in %}
-    <p>Recently submitted Rick Rolls:</p>
-    {% for rick_roll in rick_rolls %}
-        {% if not rick_roll.verified %}
+    {% if rick_rolls|length > 0 %}
+        <p>Recently submitted Rick Rolls that have not been verified:</p>
+        {% for rick_roll in rick_rolls %}
             <div class="rickRollDiv" onclick="viewRickRoll({{ rick_roll.id }})">
                 <a href="javascript:viewRickRoll({{ rick_roll.id }})">
                     {{ rick_roll.url.value }}</a>
                 <label style="float: right">Submitted at
                     <span class="timestamp">{{ rick_roll.submit_timestamp }}</span></label>
             </div>
-        {% endif %}
-    {% endfor %}
+        {% endfor %}
+    {% else %}
+        <p>There are no unverified Rick Rolls.</p>
+    {% endif %}
 {% else %}
     <p>You must be <a href="javascript:goToSignInPage()">signed in</a>
     to manage Rick Rolls</p>

@@ -20,3 +20,4 @@ DATABASE_READ_INTERVAL = 10
 SESSION_ID_DURATION = 60 * 60 # 1 hour (in seconds)
 
 SESSION_ID_COOKIE_NAME = 'isItRickSessionId'
+RICK_ROLLS_DISPLAYED = 10 # how many rick rolls are displayed on the management page?
