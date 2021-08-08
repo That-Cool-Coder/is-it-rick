@@ -114,9 +114,13 @@ def delete_rick_roll():
     
     try:
         session_id_value = request.cookies.get(config.SESSION_ID_COOKIE_NAME, None)
-        is_signed_in, session_id = database.check_if_signed_in(session_id_value)
-        user = find_in_iterable(database.users,
-            lambda x: x.name == session_id.user_name)
+        user = None
+        is_signed_in = False
+        if session_id_value is not None:
+            is_signed_in, session_id = database.check_if_signed_in(session_id_value)
+            if session_id is not None:
+                user = find_in_iterable(database.users,
+                    lambda x: x.name == session_id.user_name)
         if not is_signed_in:
             return create_response(Status.WARNING, StatusCode.NOT_SIGNED_IN)
         elif not user.is_admin:
@@ -145,9 +149,13 @@ def verify_rick_roll():
     
     try:
         session_id_value = request.cookies.get(config.SESSION_ID_COOKIE_NAME, None)
-        is_signed_in, session_id = database.check_if_signed_in(session_id_value)
-        user = find_in_iterable(database.users,
-            lambda x: x.name == session_id.user_name)
+        user = None
+        is_signed_in = False
+        if session_id_value is not None:
+            is_signed_in, session_id = database.check_if_signed_in(session_id_value)
+            if session_id is not None:
+                user = find_in_iterable(database.users,
+                    lambda x: x.name == session_id.user_name)
         if not is_signed_in:
             return create_response(Status.WARNING, StatusCode.NOT_SIGNED_IN)
         elif not user.is_admin:

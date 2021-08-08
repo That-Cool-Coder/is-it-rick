@@ -19,7 +19,7 @@ if existing_user is not None:
     quit()
 
 user_password = input('Enter password: ')
-user_is_admin = bool(input('Enter value of "admin" (true/false): '))
+user_is_admin = input('Enter value of "admin" (true/false): ') == 'true'
 
 user_password_hash = argon2.PasswordHasher().hash(user_password)
 

@@ -109,15 +109,15 @@ These are essentially the different actions
 
 - People can quickly check whether a URL leads to a verified Rick Roll, an unverified Rick Roll or is safe.
 - People can submit a URL as a Rick Roll, and when the URL is checked by another person, it will show as unverified.
-- URLs can not be verified except through manipulation of the database by server administrators.
-- User accounts exist
-- User accounts can be created from a command line utilty
+- User accounts exist.
+- User accounts can be created from a command line utilty.
+- There are two types of user accounts: normal and admin.
+- Users can view a list of recently submitted Rick Rolls.
+- Users can view a page showing info on a specific Rick Roll. On this page, admin users can verify or delete the Rick Roll.
 
 #### Planned
 
-- There is a set of managment pages that admins can access
-- In the management pages, Rick Rolls can be verified
-- In the management pages, fake Rick Rolls can be deleted
+(None)
 
 ## Program architecture and organisation
 
@@ -297,7 +297,7 @@ Currently just a page saying that you can't sign up.
 
 #### `/manage/`
 
-Home page of managing Rick Rolls. Requires the client to be logged in as an admin user and have a session id in their cookies, otherwise asks them to login.
+Home page of managing Rick Rolls. Requires the client to be logged in and have a session id in their cookies, otherwise asks them to login.
 
 #### `/view-rick-roll/<rick_roll_id>/`
 
