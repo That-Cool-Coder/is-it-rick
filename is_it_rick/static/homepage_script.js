@@ -18,25 +18,25 @@ async function checkUrl() {
     var url = urlInput.value;
     if (url == '') {
         showWarning('You must enter a URL', outputParagraph, warningParagraph);
+        return;
+    }
+    hideAllElements(outputParagraph, warningParagraph);
+    var response = await basicPost(urls.backend.isItRick, {url : url});
+    var json = await response.json();
+    if (json.status == Status.OK) {
+        showOnlyOutputElement(outputParagraph, warningParagraph);
+        
+        if (json.verified && json.is_rick_roll) {
+            outputParagraph.innerText = verifiedRickRollText;
+        }
+        else if (! json.verified && json.is_rick_roll) {
+            outputParagraph.innerText = unverifiedRickRollText;
+        } 
+        else {
+            outputParagraph.innerText = noRickRollText;
+        }
     }
     else {
-        var response = await basicPost(urls.backend.isItRick, {url : url});
-        var json = await response.json();
-        if (json.status == Status.OK) {
-            showOnlyOutputElement(outputParagraph, warningParagraph);
-            
-            if (json.verified && json.is_rick_roll) {
-                outputParagraph.innerText = verifiedRickRollText;
-            }
-            else if (! json.verified && json.is_rick_roll) {
-                outputParagraph.innerText = unverifiedRickRollText;
-            } 
-            else {
-                outputParagraph.innerText = noRickRollText;
-            }
-        }
-        else {
-            showResponseStatusCode(json, outputParagraph, warningParagraph);
-        }
+        showResponseStatusCode(json, outputParagraph, warningParagraph);
     }
 }

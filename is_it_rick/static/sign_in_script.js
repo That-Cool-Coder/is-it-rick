@@ -18,6 +18,7 @@ async function signIn() {
             outputParagraph, warningParagraph);
         return;
     }
+    hideAllElements(outputParagraph, warningParagraph);
     var response = await basicPost(urls.backend.signIn,
         {username : username, password : password});
     var json = await response.json();
