@@ -22,12 +22,13 @@ const StatusCode = {
 
 const StatusCodeMessages = {
     // Messages that go with Status WARNING
-    [StatusCode.INVALID_URL] : 'The URL you entered is not a valid URL',
+    [StatusCode.INVALID_URL] : 'The URL you entered is not a valid URL ' +
+        '(make sure you put "http://" at the start)',
     [StatusCode.INVALID_REQUEST] : 'We are having difficulty communicating with the server',
     [StatusCode.URL_ALREADY_REGISTERED] : 'That URL is already registered',
     [StatusCode.INVALID_CREDENTITALS] : 'The username or password that you entered is incorrect',
-    [StatusCode.NOT_SIGNED_IN] : 'You are not signed in',
-    [StatusCode.RICK_ROLL_NOT_FOUND] : 'The Rick Roll was not found',
+    [StatusCode.NOT_SIGNED_IN] : 'The server expected you to be signed in but you are not',
+    [StatusCode.RICK_ROLL_NOT_FOUND] : 'The Rick Roll you are looking for was not found',
     [StatusCode.USER_NOT_ADMIN] : 'You need to be an administrator to do that',
 
     // Messages that go with Status ERROR
