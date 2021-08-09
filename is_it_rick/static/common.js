@@ -111,7 +111,7 @@ function viewRickRoll(rickRollId) {
 
 function saveSessionId(sessionId) {
     Cookies.set(config.sessionIdCookieName, sessionId, {
-        secure : true,
+        secure : config.production, // only require https in production
         expires : config.sessionIdCookieDuration});
 }
 
