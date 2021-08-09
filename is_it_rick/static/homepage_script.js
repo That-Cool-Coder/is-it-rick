@@ -2,6 +2,8 @@ const urlInput = spnr.dom.id('urlInput');
 const outputParagraph = spnr.dom.id('outputParagraph');
 const warningParagraph = spnr.dom.id('warningParagraph');
 
+const loadingGif = new LoadingGif(spnr.dom.id('loadingGifHolder'));
+
 const verifiedRickRollText = 'This URL leads to a Rick Roll (verified)';
 const unverifiedRickRollText = 'This URL leads to a Rick Roll (unverified)';
 const noRickRollText = `This URL should not lead to a Rick Roll.
@@ -21,8 +23,10 @@ async function checkUrl() {
         return;
     }
     hideAllElements(outputParagraph, warningParagraph);
+    loadingGif.show();
     var response = await basicPost(urls.backend.isItRick, {url : url});
     var json = await response.json();
+    loadingGif.hide();
     if (json.status == Status.OK) {
         showOnlyOutputElement(outputParagraph, warningParagraph);
         

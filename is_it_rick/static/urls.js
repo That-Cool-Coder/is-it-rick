@@ -5,7 +5,10 @@ const urls = {
         signIn : config.baseUrl + 'sign-in/',
         signUp : config.baseUrl + 'sign-up/',
         manageRickRolls : config.baseUrl + 'manage/',
-        viewRickRoll : config.baseUrl + 'view-rick-roll/'
+        viewRickRoll : config.baseUrl + 'view-rick-roll/',
+        assets : {
+            loadingGif : config.baseUrl + 'static/loading.gif'
+        }
     },
     backend : {
         isItRick : config.baseUrl + 'api/is_it_rick/',
