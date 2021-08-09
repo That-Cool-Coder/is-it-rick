@@ -40,7 +40,18 @@ def database_read_loop():
         rick_rolls = load(config.RICK_ROLL_DATABASE_FILE)
         users = load(config.USER_DATABASE_FILE)
         session_ids = load(config.SESSION_ID_DATABASE_FILE)
+
+        delete_expired_session_ids(session_ids)
+        save(config.SESSION_ID_DATABASE_FILE, session_ids)
+
         time.sleep(config.DATABASE_READ_INTERVAL)
+
+def delete_expired_session_ids(session_ids):
+    # Loop through session ids backwards to avoid messing up indexes
+    for idx in range(len(session_ids) -1, -1, -1):
+        session_id = session_ids[idx]
+        if session_id.has_expired():
+            del session_ids[idx]
 
 def check_if_signed_in(session_id_value: str):
     '''Check if session_id_value is valid.

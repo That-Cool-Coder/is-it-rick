@@ -157,6 +157,10 @@ The optimal solution to data loading and saving would be to have the data primar
 
 To avoid this issue, each instance stores the data in variables, and every *n* seconds reads it from file. When new data is added (or when data is to be modified), the existing data read from the file, the new data is added (or modifications performed) and then the updated data is written back to the file.
 
+#### Deleting expired session ids
+
+The amount of session ids stored would increase quickly if expired ones weren't deleted, filling up disk space and harming lookup performance. To delete the expired ones, there's a function called `delete_expired_session_ids` in `database.py`. It's called in the `database_read_loop` in the same file. Perhaps putting the new function in the database read loop is bad coding style - arguably it makes the function's name (`database_read_loop`) incorrect.
+
 #### Base URLs
 
 I tried to use Flask `url_for` to allow easy shifting of the app, but that was too difficult to get working. Instead `BASE_URL` is defined in the [local config](#local-config), and it is passed to all templates when rendered. Then URLs in the template can be written as so: `{{ base_url + 'static/script.js'}}`.

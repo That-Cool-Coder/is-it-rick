@@ -17,6 +17,6 @@ SESSION_ID_DATABASE_FILE = os.path.join(DATABASE_DIRECTORY, 'session_ids.json')
 
 VERSION = '1.1.0-beta'
 DATABASE_READ_INTERVAL = 10
-SESSION_ID_DURATION = 60 * 60 # 1 hour (in seconds)
+SESSION_ID_DURATION = 60 * 60 * 7 # 1 week (in seconds)
 SESSION_ID_COOKIE_NAME = 'isItRickSessionId'
 RICK_ROLLS_DISPLAYED = 10 # how many rick rolls are displayed on the management page?
