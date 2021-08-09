@@ -44,7 +44,7 @@ def manage():
     else:
         rick_rolls = []
 
-    return render_template('manage.html', base_url=BASE_URL,
+    return render_template('manage_rick_rolls.html', base_url=BASE_URL,
         signed_in=is_signed_in, rick_rolls=rick_rolls, user=user)
 
 @blueprint.route('/view-rick-roll/<rick_roll_id>/', methods=['GET'])
