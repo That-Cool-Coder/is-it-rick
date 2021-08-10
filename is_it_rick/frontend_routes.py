@@ -55,6 +55,7 @@ def view_rick_roll(rick_roll_id):
 
     session_id_value = request.cookies.get(config.SESSION_ID_COOKIE_NAME, None)
     user = None
+    is_signed_in = False
     if session_id_value is not None:
         is_signed_in, session_id = database.check_if_signed_in(session_id_value)
         if session_id is not None:
