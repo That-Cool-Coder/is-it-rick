@@ -203,7 +203,9 @@ These are the values settable in `local_config.py`. Note that they must ALL be s
 - `PRODUCTION` (boolean) - whether this is a production or development environment. Defaults to `True`
 - `BASE_URL` (string) - the base URL that the WSGI is routed through, as set in your site's config. Defaults to `/`.
 - `DATABASE_DIRECTORY` (string) - the directory that will contain the databases. Relative to the root folder of this repo. Defaults to `/var/www/is_it_rick_data/`. It does not matter if the directory ends with a slash or not.
-- `TESTING_PORT` (integer) - the port of the computer to use for hosting the development server. Only used if `PRODUCTION` is `False`. Defaults to `5000`.
+- `DATABASE_READ_INTERVAL` (float) - the interval (in seconds) of syncing the in-memory database from file. Defaults to 1.
+- `TESTING_PORT` (integer) - the port of the computer to use for hosting the development server. Only used if `PRODUCTION` is `False` (but must always be defined). Defaults to `5000`.
+- `SESSION_ID_DURATION` (float) - duration (in seconds) that session ids of users last for. Defaults to 1 week.
 
 #### `localConfig.js`
 
