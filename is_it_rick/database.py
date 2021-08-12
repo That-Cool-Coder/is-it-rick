@@ -47,7 +47,6 @@ def database_read_loop():
         time.sleep(config.DATABASE_READ_INTERVAL)
 
 def delete_expired_session_ids(session_ids):
-    global session_ids
     # Loop through session ids backwards to avoid messing up indexes
     for idx in range(len(session_ids) -1, -1, -1):
         session_id = session_ids[idx]
