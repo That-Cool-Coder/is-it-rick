@@ -41,8 +41,8 @@ def database_read_loop():
         users = load(config.USER_DATABASE_FILE)
         session_ids = load(config.SESSION_ID_DATABASE_FILE)
 
-        delete_expired_session_ids(session_ids)
-        save(config.SESSION_ID_DATABASE_FILE, session_ids)
+        # delete_expired_session_ids(session_ids)
+        # save(config.SESSION_ID_DATABASE_FILE, session_ids)
 
         time.sleep(config.DATABASE_READ_INTERVAL)
 
